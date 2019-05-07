@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>FREE RESPONSIVE HORIZONTAL ADMIN</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="stylesheets/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME STYLE  -->
+    <link href="stylesheets/font-awesome.css" rel="stylesheet" />
+    <!-- DATATABLE STYLE  -->
+    <link href="javascripts/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="stylesheets/style.css" rel="stylesheet" />
+    <!-- GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+</head>
+<body>
+    <% include ../../partials/header.ejs %>
+     <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+         <div class="container">
+        <div class="row pad-botm">
+            <div class="col-md-12">
+                <h4 class="header-line">QUẢN LÝ SẢN PHẨM</h4>
+            </div>
+            <span class="col-md-12 input-group-prepend" style="text-align: right">
+                <span>Thêm sản phẩm</span>
+                <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#myModal">
+                    <i class="fa fa-plus-square"></i>
+                </button>
+            </span>
+        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel">
+                        <div class="panel-heading header-panel">
+                             Danh sách sản phẩm
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th class="style-middle-center">Mã sản phẩm</th>
+                                            <th class="style-middle-center">Hình ảnh</th>
+                                            <th class="style-middle-center">Tên sản phẩm</th>
+                                            <th class="style-middle-center">Mô tả</th>
+                                            <th class="style-middle-center">Giá (1 đơn vị)</th>
+                                            <th class="style-middle-center">Số lượng</th>
+                                            <th class="style-middle-center">Ngày cập nhật</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">HH370</td>
+                                            <td class="style-middle-center"> <img src="/images/rose.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Hoa Hồng</td>
+                                            <td class="style-middle-center">Hoa hồng nhập từ Đà Lạt</td>
+                                            <td class="style-middle-center">20.000</td>
+                                            <td class="style-middle-center">1000</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">OH789</td>
+                                            <td class="style-middle-center"> <img src="/images/lavender.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Oải hương</td>
+                                            <td class="style-middle-center">Hoa oải hương tím</td>
+                                            <td class="style-middle-center">35.000</td>
+                                            <td class="style-middle-center">1000</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">C670</td>
+                                            <td class="style-middle-center"> <img src="/images/cucVang.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Cúc vàng</td>
+                                            <td class="style-middle-center"></td>
+                                            <td class="style-middle-center">10.000</td>
+                                            <td class="style-middle-center">600</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">CHM680</td>
+                                            <td class="style-middle-center"> <img src="/images/cucTrang.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Cúc trắng</td>
+                                            <td class="style-middle-center">Cúc họa mi</td>
+                                            <td class="style-middle-center">13.000</td>
+                                            <td class="style-middle-center">700</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">HD124</td>
+                                            <td class="style-middle-center"> <img src="/images/huongDuong.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Hướng dương</td>
+                                            <td class="style-middle-center">Hướng dương hoa nhỏ</td>
+                                            <td class="style-middle-center">15.000</td>
+                                            <td class="style-middle-center">800</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">CC530</td>
+                                            <td class="style-middle-center"> <img src="/images/camChuong.png" class="img-product"></td>
+                                            <td class="style-middle-center">Cẩm chướng</td>
+                                            <td class="style-middle-center">Cẩm chướng đỏ</td>
+                                            <td class="style-middle-center">17.000</td>
+                                            <td class="style-middle-center">1000</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">TC1289</td>
+                                            <td class="style-middle-center"> <img src="/images/camTuCau.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Cẩm tú cầu</td>
+                                            <td class="style-middle-center">Cẩm tú cầu bông xanh, nhập từ Đà Lạt</td>
+                                            <td class="style-middle-center">50.000</td>
+                                            <td class="style-middle-center">900</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">L287</td>
+                                            <td class="style-middle-center"> <img src="/images/lan.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Lan hồ điệp</td>
+                                            <td class="style-middle-center"></td>
+                                            <td class="style-middle-center">156.000</td>
+                                            <td class="style-middle-center">1000</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">LL003</td>
+                                            <td class="style-middle-center"> <img src="/images/linhLan.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Linh lan</td>
+                                            <td class="style-middle-center">Còn gọi là hoa chuông, bông nhỏ</td>
+                                            <td class="style-middle-center">33.000</td>
+                                            <td class="style-middle-center">1000</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">HHV337</td>
+                                            <td class="style-middle-center"> <img src="/images/yellowRose.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Hoa Hồng Vàng</td>
+                                            <td class="style-middle-center"></td>
+                                            <td class="style-middle-center">23.000</td>
+                                            <td class="style-middle-center">1000</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">L998</td>
+                                            <td class="style-middle-center"> <img src="/images/ly.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Hoa ly</td>
+                                            <td class="style-middle-center">Hoa ly trắng</td>
+                                            <td class="style-middle-center">20.000</td>
+                                            <td class="style-middle-center">900</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">AD873</td>
+                                            <td class="style-middle-center"> <img src="/images/anhDao.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Hoa anh đào</td>
+                                            <td class="style-middle-center">Nhánh hoa anh đào</td>
+                                            <td class="style-middle-center">80.000</td>
+                                            <td class="style-middle-center">500</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">DTH542</td>
+                                            <td class="style-middle-center"> <img src="/images/coDuoiTho.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Cỏ đuôi thỏ</td>
+                                            <td class="style-middle-center"></td>
+                                            <td class="style-middle-center">20.000</td>
+                                            <td class="style-middle-center">430</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal">
+                                            <td class="style-middle-center">TTH078</td>
+                                            <td class="style-middle-center"> <img src="/images/coTaiTho.jpg" class="img-product"></td>
+                                            <td class="style-middle-center">Cỏ tai thỏ</td>
+                                            <td class="style-middle-center">Cỏ tai thỏ mix đủ màu</td>
+                                            <td class="style-middle-center">90.000</td>
+                                            <td class="style-middle-center">450</td>
+                                            <td class="style-middle-center">19/04/2019</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+    </div>
+    </div>
+     <!-- CONTENT-WRAPPER SECTION END-->
+    <% include ../../partials/footer.ejs %>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header header-panel">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Thông tin sản phẩm</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 col-log-12">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
+                            <div class="col-lg-10 col-md-10">
+                                <input class="form-control ng-untouched ng-pristine ng-valid" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-2 col-form-label">Giá</label>
+                            <div class="col-lg-10 col-md-10">
+                                <input class="form-control ng-pristine ng-valid ng-touched" type="number">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-2 col-form-label">Số lượng</label>
+                            <div class="col-lg-10 col-md-10">
+                                <input class="form-control ng-pristine ng-valid ng-touched" type="number">
+                            </div>
+                        </div>
+                        <label class="col-form-label">Hình ảnh</label>
+                        <div class="form-group">
+                            <section class="thumbnail-container">
+                                <div class="thumbnail-container--content image-box" for="image-upload">
+                                    <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple="" style="display: none;" type="file">
+                                    <label class="style-pointer" for="image-upload" style="max-height: 100%; max-width: 100%">
+                                        <img class="img-dialog" src="images/imageHolder.png">
+                                    </label>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- FOOTER SECTION END-->
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    <script src="javascripts/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="javascripts/bootstrap.js"></script>
+    <!-- DATATABLE SCRIPTS  -->
+    <script src="javascripts/dataTables/jquery.dataTables.js"></script>
+    <script src="javascripts/dataTables/dataTables.bootstrap.js"></script>
+      <!-- CUSTOM SCRIPTS  -->
+    <script src="javascripts/custom.js"></script>
+</body>
+</html>
