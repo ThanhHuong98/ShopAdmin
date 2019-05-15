@@ -5,11 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var userRouter = require('./routes/user');
-var orderRouter = require('./routes/order');
-var productRouter = require('./routes/order');
-var storeRouter = require('./routes/store');
 var app = express();
 
 // view engine setup
@@ -21,6 +16,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+var db = require('./db')
+
+db.connect('mongodb://localhost:27017/ShopDB', { useNewUrlParser: true },function(err, db) {
+  if (err) {
+    console.log('Unable to connect to Mongo.')
+    process.exit(1)
+  } else {
+      console.log('Connect Mongodb Successfully...')
+  }
+})
+
 
 app.use('/', indexRouter);
 // catch 404 and forward to error handler
