@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>FREE RESPONSIVE HORIZONTAL ADMIN</title>
+    <!-- BOOTSTRAP CORE STYLE  -->
+    <link href="stylesheets/bootstrap.css" rel="stylesheet" />
+    <!-- FONT AWESOME STYLE  -->
+    <link href="stylesheets/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- DATATABLE STYLE  -->
+    <link href="javascripts/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE  -->
+    <link href="stylesheets/style.css" rel="stylesheet" />
+    <!-- GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+</head>
+
+<body>
+    <% include ../../partials/header.ejs %>
+    <!-- MENU SECTION END-->
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row pad-botm">
+                <div class="col-md-12">
+                    <h4 class="header-line">QUẢN LÝ DANH MỤC</h4>
+                </div>
+                <span class="col-md-12 input-group-prepend" style="text-align: right">
+                    <span>Thêm danh mục</span>
+                    <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-plus-square"></i>
+                    </button>
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel">
+                        <div class="panel-heading header-panel">
+                            Danh sách danh mục
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th class="style-middle-center">Mã danh mục</th>
+                                            <th class="style-middle-center">Hình ảnh</th>
+                                            <th class="style-middle-center">Tên danh mục</th>
+                                            <th class="style-middle-center">Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="style-middle-center">HH370</td>
+                                            <td class="style-middle-center"> <img src="/images/rose.jpg"
+                                                    class="img-product"></td>
+                                            <td class="style-middle-center">Hoa Hồng</td>
+                                            <td class="style-middle-center">
+                                                <a data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
+                                                <a href="/category/detele?id="><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CONTENT-WRAPPER SECTION END-->
+    <% include ../../partials/footer.ejs %>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+        style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content" , method="post">
+                <div class="modal-header header-panel">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Thông tin sản phẩm</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 col-log-12">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
+                            <div class="col-lg-10 col-md-10">
+                                <input class="form-control ng-untouched ng-pristine ng-valid" type="text" name='name'>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-2 col-form-label">Giá</label>
+                            <div class="col-lg-10 col-md-10">
+                                <input class="form-control ng-pristine ng-valid ng-touched" type="number" name='price'>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-2 col-form-label">Số lượng</label>
+                            <div class="col-lg-10 col-md-10">
+                                <input class="form-control ng-pristine ng-valid ng-touched" type="number"
+                                    name='quantity'>
+                            </div>
+                        </div>
+                        <label class="col-form-label">Hình ảnh</label>
+                        <div class="form-group">
+                            <section class="thumbnail-container">
+                                <div class="thumbnail-container--content image-box" for="image-upload">
+                                    <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple=""
+                                        style="display: none;" type="file">
+                                    <label class="style-pointer" for="image-upload"
+                                        style="max-height: 100%; max-width: 100%">
+                                        <img class="img-dialog" src="images/imageHolder.png">
+                                    </label>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea class="form-control" rows="3" name='info'></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    <a href="" target="_parent">
+                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER SECTION END-->
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    <script src="javascripts/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="javascripts/bootstrap.js"></script>
+    <!-- DATATABLE SCRIPTS  -->
+    <script src="javascripts/dataTables/jquery.dataTables.js"></script>
+    <script src="javascripts/dataTables/dataTables.bootstrap.js"></script>
+    <!-- CUSTOM SCRIPTS  -->
+    <script src="javascripts/custom.js"></script>
+</body>
+
+</html>
