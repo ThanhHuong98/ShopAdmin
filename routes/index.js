@@ -9,6 +9,11 @@ var store_controller = require('../controllers/storeController')
 router.get('/', home_controller.index);
 router.get('/user',user_controller.user );
 router.get('/order', order_controller.order );
-router.get('/product',product_controller.product );
+router.get('/product',product_controller.product);
 router.get('/store', store_controller.store);
+
+//router.get('',product_controller.addProduct);
+
+
 module.exports = router;
+

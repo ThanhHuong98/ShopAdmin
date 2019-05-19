@@ -18,8 +18,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var db = require('./db')
-
-db.connect('mongodb://localhost:27017/ShopDB', { useNewUrlParser: true },function(err, db) {
+var PROD_DB_URI = process.env.PROD_DB_URI
+db.connect(PROD_DB_URI, { useNewUrlParser: true },function(err, db) {
   if (err) {
     console.log('Unable to connect to Mongo.')
     process.exit(1)
