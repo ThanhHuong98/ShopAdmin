@@ -52,104 +52,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <%listCustomer.forEach(function(customer){ %>
                                         <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
+                                            <td><%=customer.name%></td>
+                                            <td><%=customer.address%></td>
+                                            <td><%=customer.phone%></td>
                                             <td class="center">abc@gmail.com</td>
                                             <td class="center">19/04/2019</td>
                                         </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td>Phú Duy</td>
-                                            <td>Q8, TP.HCM</td>
-                                            <td>123456789</td>
-                                            <td class="center">abc@gmail.com</td>
-                                            <td class="center">19/04/2019</td>
-                                        </tr>
+                                    <% }); %>
                                     </tbody>
                                 </table>
                             </div>
@@ -271,24 +182,15 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <%listCustomerHot.forEach(function(customer){ %>
+
                                     <tr>
                                         <td>1</td>
-                                        <td>Phú Duy</td>
-                                        <td>123456789</td>
-                                        <td>Q8, TP.HCM</td>
+                                        <td><%=customer.name%></td>
+                                        <td><%=customer.phone%></td>
+                                        <td><%=customer.address%></td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Thanh Hương</td>
-                                        <td>456789998</td>
-                                        <td>Q1, TP.HCM</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Quang Huân</td>
-                                        <td>2334456576</td>
-                                        <td>Quận Tân Phú, TP.HCM</td>
-                                    </tr>
+                                    <% }); %>
                                     </tbody>
                                 </table>
                             </div>
@@ -314,21 +216,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <%listCustomerNew.forEach(function(customer){ %>
+                                    <tr>
                                         <td>1</td>
-                                        <td>Phú Duy</td>
-                                        <td>123456789</td>
-                                        <td>Q8, TP.HCM</td>
+                                        <td><%=customer.name%></td>
+                                        <td><%=customer.phone%></td>
+                                        <td><%=customer.address%></td>
                                     </tr>
-                                        <td>2</td>
-                                        <td>Thanh Hương</td>
-                                        <td>456789998</td>
-                                        <td>Q1, TP.HCM</td>
-                                    </tr>
-                                        <td>3</td>
-                                        <td>Quang Huân</td>
-                                        <td>2334456576</td>
-                                        <td>Quận Tân Phú, TP.HCM</td>
-                                    </tr>
+                                    <% }); %>
                                     </tbody>
                                 </table>
                             </div>

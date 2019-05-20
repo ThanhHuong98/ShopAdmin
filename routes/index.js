@@ -3,7 +3,7 @@ const app = express();
 var router = express.Router();
 
 var home_controller = require('../controllers/homeController')
-var user_controller = require('../controllers/userController')
+var user_controller = require('../controllers/customerController')
 var order_controller = require('../controllers/orderController')
 var product_controller = require('../controllers/productController')
 var category_controller = require('../controllers/categoryController')

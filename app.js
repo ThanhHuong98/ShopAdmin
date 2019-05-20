@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 var db = require('./db')
 var PROD_DB_URI = process.env.PROD_DB_URI
-db.connect(PROD_DB_URI, { useNewUrlParser: true },function(err, db) {
+db.connect(PROD_DB_URI,function(err, db) {
   if (err) {
     console.log('Unable to connect to Mongo.')
     process.exit(1)
