@@ -1,6 +1,7 @@
 
 var Order = require('../models/order');
 var async = require('async');
+var x;
 
 exports.order =function(req, res, next) {
     async.parallel({
@@ -20,6 +21,10 @@ exports.order =function(req, res, next) {
     });
 }
 
+function myFunction() {
+    x = document.getElementById("mySelect").value;
+   // document.getElementById("demo").innerHTML = "You selected: " + x;
+}
 
 
 

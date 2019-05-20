@@ -62,26 +62,27 @@
                                     <tbody>
                                         <%listCategory.forEach(function(category){ %>
                                         <tr>
-                                            <td class="style-middle-center category-code"><%category.code%></td>
+                                            <td class="style-middle-center category-code"><%=category.code%></td>
                                             <td class="style-middle-center category-img">
-                                                <img src="<%category.image>" class="img-product">
+                                                <img src="<%=category.image%>" class="img-product">
                                             </td>
-                                            <td class="style-middle-center category-name"><%category.name%></td>
+                                            <td class="style-middle-center category-name"><%=category.name%></td>
                                             <td class="style-middle-center">
                                                 <a class="open-dialog" data-toggle="modal" data-target="#myModal"
-                                                    data-id="<%category._id>" style="text-decoration: none">
+                                                    data-id="<%=category._id%>" style="text-decoration: none">
                                                     <button class="btn btn-outline-primary" type="button">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="/category/detele?id=<%category._id>">
+                                                <a href="/category/detele?id=<%category._id%>">
                                                     <button class="btn btn-outline-primary" type="button">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </a>
                                             </td>
                                         </tr>
-                                        <%});%>
+
+                                  <% }); %>
                                     </tbody>
                                 </table>
                             </div>
