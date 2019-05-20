@@ -9,7 +9,7 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>FREE RESPONSIVE HORIZONTAL ADMIN</title>
+    <title>Floral Admin - Category</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -36,7 +36,8 @@
                 </div>
                 <span class="col-md-12 input-group-prepend" style="text-align: right">
                     <span>Thêm danh mục</span>
-                    <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#myModal">
+                    <button class="btn btn-outline-primary create-category" type="button" data-toggle="modal"
+                        data-target="#myModal">
                         <i class="fa fa-plus-square"></i>
                     </button>
                 </span>
@@ -60,20 +61,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% listCategory.forEach(function(category){ %>
                                         <tr>
-                                            <td class="style-middle-center category-code">MX</td>
+                                            <td class="style-middle-center category-code"><%=category.code%></td>
                                             <td class="style-middle-center category-img">
-                                                <img src="/images/rose.jpg" class="img-product">
+                                                <img src="<%=category.immage%>" class="img-product">
                                             </td>
-                                            <td class="style-middle-center category-name">Mùa Xuân</td>
+                                            <td class="style-middle-center category-name"><%=category.name%></td>
                                             <td class="style-middle-center">
                                                 <a class="open-dialog" data-toggle="modal" data-target="#myModal"
-                                                    data-id="MX" style="text-decoration: none">
+                                                    data-id="<%=category._id%>" style="text-decoration: none">
                                                     <button class="btn btn-outline-primary" type="button">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                 </a>
-                                                <a href="/category/detele?id=">
+                                                <a href="/category/detele?id=<%=category._id%>">
                                                     <button class="btn btn-outline-primary" type="button">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
@@ -108,7 +110,14 @@
                                 <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
                                 <div class="col-lg-10 col-md-10">
                                     <input class="form-control ng-untouched ng-pristine ng-valid name" type="text"
-                                        name='name'>
+                                        name='name' value="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-md-2 col-form-label">Mã danh mục</label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input class="form-control ng-untouched ng-pristine ng-valid code" type="text"
+                                        name='code' value="">
                                 </div>
                             </div>
                             <label class="col-form-label">Hình ảnh</label>
@@ -127,9 +136,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                            <a href="" target="_parent">
-                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                            </a>
+                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                         </div>
                     </div>
                 </div>
@@ -151,15 +158,26 @@
     <script>
         $(".open-dialog").click(function () {
             var name = $(".open-dialog").parent().parent().find(".category-name").text();
+            var code = $(".open-dialog").parent().parent().find(".category-code").text();
             var img = $(".open-dialog").parent().parent().find(".category-img").find(".img-product").attr('src');
             var id = $(".open-dialog").data("id");
             var ref = "category/edit?id=" + id;
             $(".name").val(name);
+            $(".code").val(code);
             $(".img-dialog").attr('src', img);
             $(".edit-form").attr('action', ref);
         })
     </script>
 
+    <script>
+        $(".create-category").click(function () {
+            var ref = "category/create"
+            $(".name").val("");
+            $(".code").val("");
+            $(".img-dialog").attr('src', "images/imageHolder.png");
+            $(".edit-form").attr('action', ref);
+        })
+    </script>
 </body>
 
 </html>
