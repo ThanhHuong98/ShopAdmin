@@ -25,7 +25,13 @@ exports.user = function(req, res, next) {
 
 exports.edit = function(req, res, next)
 {
-    Customer.editCustomer(req.query.id, function (err, result) {
+    var today = new Date();
+    var updatedTime = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
+    var name = req.body.name;
+    var address = req.body.address;
+    var phone = req.body.phone;
+
+    Customer.editCustomer(req.query.id, name, address, phone, updatedTime, function (err, result) {
         if (err) { return next(err); }
         else {
           res.redirect('./user');

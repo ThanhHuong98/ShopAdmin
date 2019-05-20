@@ -1,3 +1,4 @@
+
 var db = require('../db.js');
 var ObjectId = require('mongodb').ObjectID;
 
@@ -18,20 +19,28 @@ exports.findCategory = function(id, callBack)
     });
 }
 
-exports.addCategory = function(category, callBack)
+exports.addCategory = function(name, code, img, callBack)
 {
     var collection = db.get().collection('Category');
 
-    collection.insertOne(category, function(err, result){
+    collection.insertOne({
+        code : code,
+        name : name,
+        image: img
+    }, function(err, result){
         callBack(err, result);
     });
 }
 
-exports.editCategory = function(id, category, callBack)
+exports.editCategory = function(id, name, code, img, callBack)
 {
     var collection = db.get().collection('Category');
 
-    collection.updateOne({"_id" : ObjectId(id)}, category, function(err, result){
+    collection.updateOne({_id : ObjectId(id)}, {
+        code : code,
+        name : name,
+        image : img
+    }, function(err, result){
         callBack(err, result);
     });
 }
@@ -40,8 +49,7 @@ exports.deleteCategory = function(id, callBack)
 {
     var collection = db.get().collection('Category');
 
-    collection.deleteOne({ "_id" : ObjectId(id) }, function(err, result){
+    collection.deleteOne({ _id : ObjectId(id) }, function(err, result){
         callBack(err, result);
     });
 }
-

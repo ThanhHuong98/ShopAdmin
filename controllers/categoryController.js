@@ -1,4 +1,6 @@
 var Category = require('../models/category');
+const Resize = require('../resize');
+var path = require('path');
 
 exports.category = function (req, res, next){
   Category.getAllCategory(function(err, docs){
@@ -12,29 +14,47 @@ exports.category = function (req, res, next){
 }
 
   exports.addCategory = function(req, res, next){
-    console.log('Product add: ',req.body);
 
-    Category.addOne(req.body, function(err, result){
-      if (err) { return next(err); }
-      else{
-       // res.redirect('./');
+    var code = req.body.code;
+    var name = req.body.name;
+
+    const imagePath = path.join(__dirname,'../public/template/images/products/');
+    const fileUpload = new Resize(imagePath);
+    if(!req.file){
+      res.status(401).json({error: 'Please provide an image'});
+    }
+    const filename = await fileUpload.save(req.file.buffer);
+    const image = "/template/images/categories/"+filename;
+    Category.addCategory(name, code, image, function(err,result){
+      if(err){
+        res.err(err);
+      }else{
+        res.redirect('/category');
       }
     });
   }
+
   exports.delete = function (req, res, next) {
     Category.deleteCategory(req.query.id, function (err, result) {
       if (err) { return next(err); }
       else {
-        res.redirect('./category');
+        res.redirect('/category');
       }
     });
   }
   
   exports.edit = function (req, res, next) {
-    Category.editCategory(req.query.id, req.body, function (err, result) {
+    var code = req.body.code;
+    var name = req.body.name;
+    const imagePath = path.join(__dirname,'../public/template/images/products/');
+    const fileUpload = new Resize(imagePath);
+    const filename = await fileUpload.save(req.file.buffer);
+    const image = "/template/images/categories/"+filename;
+
+    Category.editCategory(req.query.id, name, code, image, function (err, result) {
       if (err) { return next(err); }
       else {
-        res.redirect('./category');
+        res.redirect('/category');
       }
     });
   }

@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -12,6 +13,8 @@
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link href="stylesheets/font-awesome.css" rel="stylesheet" />
     <!-- DATATABLE STYLE  -->
     <link href="javascripts/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
@@ -21,170 +24,70 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
 </head>
+
 <body>
     <% include ../../partials/header.ejs %>
-     <!-- MENU SECTION END-->
+    <!-- MENU SECTION END-->
     <div class="content-wrapper">
-         <div class="container">
-        <div class="row pad-botm">
-            <div class="col-md-12">
-                <h4 class="header-line">QUẢN LÝ SẢN PHẨM</h4>
+        <div class="container">
+            <div class="row pad-botm">
+                <div class="col-md-12">
+                    <h4 class="header-line">QUẢN LÝ SẢN PHẨM</h4>
+                </div>
+                <span class="col-md-12 input-group-prepend" style="text-align: right">
+                    <span>Thêm sản phẩm</span>
+                    <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#myModal"
+                        id="btn-add-product">
+                        <i class="fa fa-plus-square"></i>
+                    </button>
+                </span>
             </div>
-            <span class="col-md-12 input-group-prepend" style="text-align: right">
-                <span>Thêm sản phẩm</span>
-                <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#myModal">
-                    <i class="fa fa-plus-square"></i>
-                </button>
-            </span>
-        </div>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel">
                         <div class="panel-heading header-panel">
-                             Danh sách sản phẩm
+                            Danh sách sản phẩm
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th class="style-middle-center">Mã sản phẩm</th>
-                                            <th class="style-middle-center">Hình ảnh</th>
                                             <th class="style-middle-center">Tên sản phẩm</th>
+                                            <th class="style-middle-center">Hình ảnh</th>
                                             <th class="style-middle-center">Mô tả</th>
                                             <th class="style-middle-center">Giá (1 đơn vị)</th>
                                             <th class="style-middle-center">Số lượng</th>
-                                            <th class="style-middle-center">Ngày cập nhật</th>
+                                            <th class="style-middle-center">Danh mục</th>
+                                            <th class="style-middle-center">Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">HH370</td>
-                                            <td class="style-middle-center"> <img src="/images/rose.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Hoa Hồng</td>
-                                            <td class="style-middle-center">Hoa hồng nhập từ Đà Lạt</td>
-                                            <td class="style-middle-center">20.000</td>
-                                            <td class="style-middle-center">1000</td>
-                                            <td class="style-middle-center">19/04/2019</td>
+                                        <% listProduct.forEach(function(product){ %>
+                                        <tr>
+                                            <td class="style-middle-center" id="product-name"><%=product.name%></td>
+                                            <td class="style-middle-center">
+                                                <img src="<%=product.image%>" class="img-product" id="product-image">
+                                            </td>
+                                            <td class="style-middle-center" id="product-info"><%=product.info%></td>
+                                            <td class="style-middle-center" id="product-price"><%=product.price%>
+                                            </td>
+                                            <td class="style-middle-center" id="product-quantity"><%=product.quantity%>
+                                            </td>
+                                            <td class="style-middle-center" id="product-category">
+                                                <%=product.category_field[0].name%></td>
+                                            <td class="style-middle-center">
+                                                <button class="btn btn-outline-primary btn-edit-product" type="button"
+                                                    data-toggle="modal" data-target="#myModal"
+                                                    data-id="<%=product._id%>">
+                                                    <i class="fa fa-edit"></i></button>
+                                                <a class="btn btn-outline-primary btn-delete-product" type="button"
+                                                    href="/product/delete/<%=product._id%>">
+                                                    <i class="far fa-trash-alt"></i></a>
+                                            </td>
                                         </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">OH789</td>
-                                            <td class="style-middle-center"> <img src="/images/lavender.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Oải hương</td>
-                                            <td class="style-middle-center">Hoa oải hương tím</td>
-                                            <td class="style-middle-center">35.000</td>
-                                            <td class="style-middle-center">1000</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">C670</td>
-                                            <td class="style-middle-center"> <img src="/images/cucVang.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Cúc vàng</td>
-                                            <td class="style-middle-center"></td>
-                                            <td class="style-middle-center">10.000</td>
-                                            <td class="style-middle-center">600</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">CHM680</td>
-                                            <td class="style-middle-center"> <img src="/images/cucTrang.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Cúc trắng</td>
-                                            <td class="style-middle-center">Cúc họa mi</td>
-                                            <td class="style-middle-center">13.000</td>
-                                            <td class="style-middle-center">700</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">HD124</td>
-                                            <td class="style-middle-center"> <img src="/images/huongDuong.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Hướng dương</td>
-                                            <td class="style-middle-center">Hướng dương hoa nhỏ</td>
-                                            <td class="style-middle-center">15.000</td>
-                                            <td class="style-middle-center">800</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">CC530</td>
-                                            <td class="style-middle-center"> <img src="/images/camChuong.png" class="img-product"></td>
-                                            <td class="style-middle-center">Cẩm chướng</td>
-                                            <td class="style-middle-center">Cẩm chướng đỏ</td>
-                                            <td class="style-middle-center">17.000</td>
-                                            <td class="style-middle-center">1000</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">TC1289</td>
-                                            <td class="style-middle-center"> <img src="/images/camTuCau.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Cẩm tú cầu</td>
-                                            <td class="style-middle-center">Cẩm tú cầu bông xanh, nhập từ Đà Lạt</td>
-                                            <td class="style-middle-center">50.000</td>
-                                            <td class="style-middle-center">900</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">L287</td>
-                                            <td class="style-middle-center"> <img src="/images/lan.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Lan hồ điệp</td>
-                                            <td class="style-middle-center"></td>
-                                            <td class="style-middle-center">156.000</td>
-                                            <td class="style-middle-center">1000</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">LL003</td>
-                                            <td class="style-middle-center"> <img src="/images/linhLan.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Linh lan</td>
-                                            <td class="style-middle-center">Còn gọi là hoa chuông, bông nhỏ</td>
-                                            <td class="style-middle-center">33.000</td>
-                                            <td class="style-middle-center">1000</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">HHV337</td>
-                                            <td class="style-middle-center"> <img src="/images/yellowRose.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Hoa Hồng Vàng</td>
-                                            <td class="style-middle-center"></td>
-                                            <td class="style-middle-center">23.000</td>
-                                            <td class="style-middle-center">1000</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">L998</td>
-                                            <td class="style-middle-center"> <img src="/images/ly.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Hoa ly</td>
-                                            <td class="style-middle-center">Hoa ly trắng</td>
-                                            <td class="style-middle-center">20.000</td>
-                                            <td class="style-middle-center">900</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">AD873</td>
-                                            <td class="style-middle-center"> <img src="/images/anhDao.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Hoa anh đào</td>
-                                            <td class="style-middle-center">Nhánh hoa anh đào</td>
-                                            <td class="style-middle-center">80.000</td>
-                                            <td class="style-middle-center">500</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">DTH542</td>
-                                            <td class="style-middle-center"> <img src="/images/coDuoiTho.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Cỏ đuôi thỏ</td>
-                                            <td class="style-middle-center"></td>
-                                            <td class="style-middle-center">20.000</td>
-                                            <td class="style-middle-center">430</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
-                                        <tr data-toggle="modal" data-target="#myModal">
-                                            <td class="style-middle-center">TTH078</td>
-                                            <td class="style-middle-center"> <img src="/images/coTaiTho.jpg" class="img-product"></td>
-                                            <td class="style-middle-center">Cỏ tai thỏ</td>
-                                            <td class="style-middle-center">Cỏ tai thỏ mix đủ màu</td>
-                                            <td class="style-middle-center">90.000</td>
-                                            <td class="style-middle-center">450</td>
-                                            <td class="style-middle-center">19/04/2019</td>
-                                        </tr>
+                                        <% }); %>
                                     </tbody>
                                 </table>
                             </div>
@@ -193,74 +96,132 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
-    </div>
-    </div>
-     <!-- CONTENT-WRAPPER SECTION END-->
-    <% include ../../partials/footer.ejs %>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content", method="post">
-                <div class="modal-header header-panel">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Thông tin sản phẩm</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12 col-log-12">
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
-                            <div class="col-lg-10 col-md-10">
-                                <input class="form-control ng-untouched ng-pristine ng-valid" type="text" name='name' >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-2 col-form-label">Giá</label>
-                            <div class="col-lg-10 col-md-10">
-                                <input class="form-control ng-pristine ng-valid ng-touched" type="number" name='price' >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-2 col-md-2 col-form-label">Số lượng</label>
-                            <div class="col-lg-10 col-md-10">
-                                <input class="form-control ng-pristine ng-valid ng-touched" type="number" name='quantity' >
-                            </div>
-                        </div>
-                        <label class="col-form-label">Hình ảnh</label>
-                        <div class="form-group">
-                            <section class="thumbnail-container">
-                                <div class="thumbnail-container--content image-box" for="image-upload">
-                                    <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple="" style="display: none;" type="file">
-                                    <label class="style-pointer" for="image-upload" style="max-height: 100%; max-width: 100%">
-                                        <img class="img-dialog" src="images/imageHolder.png">
-                                    </label>
-                                </div>
-                            </section>
-                        </div>
-                        <div class="form-group">
-                            <label>Mô tả</label>
-                            <textarea class="form-control" rows="3" name='info' ></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                    <a href="" target="_parent">
-                        <button type="button" class="btn btn-primary">Lưu thay đổi</button>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
-      <!-- FOOTER SECTION END-->
+    <!-- CONTENT-WRAPPER SECTION END-->
+    <% include ../../partials/footer.ejs %>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+        style="display: none;">
+        <div class="modal-dialog">
+            <form method="POST" id="my-form" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header header-panel">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Thông tin sản phẩm</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12 col-log-12">
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input class="form-control ng-untouched ng-pristine ng-valid" type="text"
+                                        name='name' id="txt-product-name" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-md-2 col-form-label" for="category-list">Danh mục</label>
+                                <div class="col-lg-10 col-md-10">
+                                    <select class="form-control ng-pristine ng-valid ng-touched" id="category-list"
+                                        name="category">
+                                        <% listCategory.forEach(function(category){ %>
+                                        <option value="<%=category.code%>"><%=category.name%></option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-md-2 col-form-label">Giá tiền</label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input class="form-control ng-pristine ng-valid ng-touched" type="number"
+                                        name='price' id="txt-product-price" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-2 col-md-2 col-form-label">Số lượng</label>
+                                <div class="col-lg-10 col-md-10">
+                                    <input class="form-control ng-pristine ng-valid ng-touched" type="number"
+                                        name='quantity' id="txt-product-quantity" required>
+                                </div>
+                            </div>
+                            <label class="col-form-label">Hình ảnh</label>
+                            <div class="form-group">
+                                <section class="thumbnail-container">
+                                    <div class="thumbnail-container--content image-box" for="image-upload">
+                                        <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple=""
+                                            style="display: none;" type="file" name="image" onchange="loadFile(event)">
+                                        <label class="style-pointer" for="image-upload"
+                                            style="max-height: 100%; max-width: 100%">
+                                            <img class="img-dialog" src="images/imageHolder.png" id="txt-product-image">
+                                        </label>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả</label>
+                                <textarea class="form-control" rows="3" name='info' required
+                                    id="txt-product-info"></textarea>
+                                <input type="text" name='id' id="txt-product-id"
+                                    style="height: 0px; width: 0px; visibility: hidden;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                        <a href="" target="_parent">
+                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- FOOTER SECTION END-->
     <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
     <!-- CORE JQUERY  -->
     <script src="javascripts/jquery-1.10.2.js"></script>
+    <script>
+        $("#btn-add-product").click(function () {
+            $("#my-form").attr('action', '/product/add');
+            $('#txt-product-name').attr('placeholder', '');
+            $('#txt-product-image').attr('src', 'images/imageHolder.png');
+            $('#txt-product-info').attr('placeholder', '');
+            $('#txt-product-price').attr('placeholder', '');
+            $('#txt-product-quantity').attr('placeholder', '');
+            $("#category-list option").attr('selected', false);
+        })
+        $(".btn-edit-product").click(function () {
+            var id = $(this).data('id');
+            $("#my-form").attr('action', '/product/edit?id=' + id);
+            var name = $(this).parent().parent().find('#product-name').text();
+            var image = $(this).parent().parent().find('#product-image').attr('src');
+            var info = $(this).parent().parent().find('#product-info').text();
+            var price = $(this).parent().parent().find('#product-price').text();
+            var quantity = $(this).parent().parent().find('#product-quantity').text();
+            var category = $(this).parent().parent().find('#product-category').text().trim();
+            $('#txt-product-name').attr('placeholder', name);
+            $('#txt-product-image').attr('src', image);
+            $('#txt-product-info').attr('placeholder', info);
+            $('#txt-product-price').attr('placeholder', price);
+            $('#txt-product-quantity').attr('placeholder', quantity);
+            $("#category-list option").filter(function () {
+                return $(this).text() == category;
+            }).attr('selected', true);
+            $('#txt-product-id').attr('value', id);
+        })
+        var loadFile = function (event) {
+            var image = document.getElementById('txt-product-image');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+    </script>
     <!-- BOOTSTRAP SCRIPTS  -->
     <script src="javascripts/bootstrap.js"></script>
     <!-- DATATABLE SCRIPTS  -->
     <script src="javascripts/dataTables/jquery.dataTables.js"></script>
     <script src="javascripts/dataTables/dataTables.bootstrap.js"></script>
-      <!-- CUSTOM SCRIPTS  -->
+    <!-- CUSTOM SCRIPTS  -->
     <script src="javascripts/custom.js"></script>
 </body>
+
 </html>

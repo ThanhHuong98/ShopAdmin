@@ -113,15 +113,22 @@
                                         name='name'>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                    <label class="col-lg-2 col-md-2 col-form-label">Mã</label>
+                                    <div class="col-lg-10 col-md-10">
+                                        <input class="form-control ng-untouched ng-pristine ng-valid name" type="text"
+                                            name='code'>
+                                    </div>
+                                </div>
                             <label class="col-form-label">Hình ảnh</label>
                             <div class="form-group">
                                 <section class="thumbnail-container">
                                     <div class="thumbnail-container--content image-box" for="image-upload">
-                                        <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple=""
+                                        <input accept="image/jpeg, image/gif, image/png" id="image-upload" name ="image-upload" multiple=""
                                             style="display: none;" type="file">
                                         <label class="style-pointer" for="image-upload"
                                             style="max-height: 100%; max-width: 100%">
-                                            <img class="img-dialog" src="images/imageHolder.png">
+                                            <img class="img-dialog" src="images/imageHolder.png" id="txt-product-image">
                                         </label>
                                     </div>
                                 </section>
@@ -129,9 +136,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                            <a href="" target="_parent">
-                                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                            </a>
+                            <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                         </div>
                     </div>
                 </div>
@@ -151,6 +156,14 @@
     <script src="javascripts/custom.js"></script>
 
     <script>
+        $(".create-category").click(function () {
+                var ref = "category/create"
+                $(".name").val("");
+                $(".code").val("");
+                $(".img-dialog").attr('src', "images/imageHolder.png");
+                $(".edit-form").attr('action', ref);
+        })
+
         $(".open-dialog").click(function () {
             var name = $(".open-dialog").parent().parent().find(".category-name").text();
             var img = $(".open-dialog").parent().parent().find(".category-img").find(".img-product").attr('src');
@@ -160,17 +173,11 @@
             $(".img-dialog").attr('src', img);
             $(".edit-form").attr('action', ref);
         })
+        var loadFile = function (event) {
+        var image = document.getElementById('txt-product-image');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
-
-    <script>
-            $(".create-category").click(function () {
-                var ref = "category/create"
-                $(".name").val("");
-                $(".code").val("");
-                $(".img-dialog").attr('src', "images/imageHolder.png");
-                $(".edit-form").attr('action', ref);
-            })
-        </script>
 </body>
 
 </html>
