@@ -16,3 +16,19 @@ exports.allCustomerByType=function (mtype,cb) {
     })
 
 }
+
+exports.editCustomer = function (id, user, callBack)
+{
+    var collection = db.get().collection('Customer');
+    collection.updateOne({"_id" : ObjectId(id)}, user, function(err, result){
+        callBack(err, result);
+    });
+}
+
+exports.deleteCustomer = function (id, callBack)
+{
+    var collection = db.get().collection('Customer');
+    collection.deleteOne({"_id" : ObjectId(id)}, function(err, result){
+        callBack(err, result);
+    });
+}

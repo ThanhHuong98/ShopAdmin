@@ -21,13 +21,27 @@ exports.user = function(req, res, next) {
             res.render('pages/user/user', {listCustomer: results.listCustomer,listCustomerHot: results.listCustomerHot,listCustomerNew:results.listCustomerNew  });
         }
     });
-    // Customer.allCustomer(function (err, docs) {
-    //     if(err){res.err(err);}
-    //     else {
-    //         console.log(docs);
-    //        // res.render('pages/user/user');
-    //        res.render('pages/user/user', {listCustomer:docs});
-    //      }
-    // })
+}
 
-  }
+exports.edit = function(req, res, next)
+{
+    Customer.editCustomer(req.query.id, function (err, result) {
+        if (err) { return next(err); }
+        else {
+          res.redirect('./user');
+        }
+      });
+}
+
+exports.delete = function(req, res, next)
+{
+    Customer.deleteCustomer(req.query.id, function(err, result){
+        if(err){
+            return next(err);
+        }
+        else
+        {
+            res.redirect('./user');
+        }
+    });
+}
