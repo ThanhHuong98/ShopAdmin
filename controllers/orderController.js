@@ -21,6 +21,22 @@ exports.order =function(req, res, next) {
     });
 }
 
+exports.updateStatus = function(req, res, callBack)
+{
+    var id = req.query.id;
+    var status = req.query.status;
+    Order.updateStatus(id, status, function(err, result){
+        if(err)
+        {
+            return next(err);
+        }
+        else
+        {
+            res.redirect('/order');
+        }
+    })
+}
+
 function myFunction() {
     x = document.getElementById("mySelect").value;
    // document.getElementById("demo").innerHTML = "You selected: " + x;

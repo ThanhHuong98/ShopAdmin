@@ -26,13 +26,13 @@ exports.category = function (req, res, next){
     // }
     // const filename = await fileUpload.save(req.file.buffer);
     // const image = "/template/images/categories/"+filename;
-    // Category.addCategory(name, code, image, function(err,result){
-    //   if(err){
-    //     res.err(err);
-    //   }else{
-    //     res.redirect('/category');
-    //   }
-    // });
+     Category.addCategory(name, code, "", function(err,result){
+       if(err){
+         res.err(err);
+       }else{
+         res.redirect('/category');
+       }
+     });
   }
 
   exports.delete = function (req, res, next) {
@@ -52,11 +52,11 @@ exports.category = function (req, res, next){
     // const filename = await fileUpload.save(req.file.buffer);
     // const image = "/template/images/categories/"+filename;
     //
-    // Category.editCategory(req.query.id, name, code, image, function (err, result) {
-    //   if (err) { return next(err); }
-    //   else {
-    //     res.redirect('/category');
-    //   }
-    // });
+     Category.editCategory(req.query.id, name, code, "", function (err, result) {
+       if (err) { return next(err); }
+       else {
+         res.redirect('/category');
+       }
+   });
   }
 

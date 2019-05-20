@@ -64,7 +64,7 @@
                                         <tr>
                                             <td class="style-middle-center category-code"><%=category.code%></td>
                                             <td class="style-middle-center category-img">
-                                                <img src="<%=category.image%>" class="img-product">
+                                                <img src="<%=category.image%>" class="img-category">
                                             </td>
                                             <td class="style-middle-center category-name"><%=category.name%></td>
                                             <td class="style-middle-center">
@@ -81,7 +81,6 @@
                                                 </a>
                                             </td>
                                         </tr>
-
                                   <% }); %>
                                     </tbody>
                                 </table>
@@ -129,7 +128,7 @@
                                             style="display: none;" type="file">
                                         <label class="style-pointer" for="image-upload"
                                             style="max-height: 100%; max-width: 100%">
-                                            <img class="img-dialog" src="images/imageHolder.png" id="txt-product-image">
+                                            <img class="img-dialog" src="images/imageHolder.png" id="txt-category-image">
                                         </label>
                                     </div>
                                 </section>
@@ -166,16 +165,16 @@
         })
 
         $(".open-dialog").click(function () {
-            var name = $(".open-dialog").parent().parent().find(".category-name").text();
-            var img = $(".open-dialog").parent().parent().find(".category-img").find(".img-product").attr('src');
-            var id = $(".open-dialog").data("id");
+            var name = $(this).parent().parent().find(".category-name").text();
+            var img = $(this).parent().parent().find(".category-img").find(".img-category").attr('src');
+            var id = $(this).data("id");
             var ref = "category/edit?id=" + id;
             $(".name").val(name);
             $(".img-dialog").attr('src', img);
             $(".edit-form").attr('action', ref);
         })
         var loadFile = function (event) {
-        var image = document.getElementById('txt-product-image');
+        var image = document.getElementById('txt-category-image');
         image.src = URL.createObjectURL(event.target.files[0]);
         };
     </script>
