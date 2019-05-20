@@ -53,6 +53,7 @@ exports.edit = function(id,name,info,category,price,quantity,image,cb){
         cb(err,result)
     })
 }
+
 exports.delete = function(id,cb){    
     var collection = db.get().collection('Product');
     collection.deleteOne({

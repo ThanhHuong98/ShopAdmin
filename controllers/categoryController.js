@@ -8,16 +8,16 @@ exports.category = function (req, res, next){
     { return next(err); }
     else
     {
-      console.log(docs);
       res.render('pages/category/category', {listCategory: docs});
     }
   });
 }
 
-  exports.addCategory = function(req, res, next){
+  exports.addCategory = async function(req, res, next){
 
     var code = req.body.code;
     var name = req.body.name;
+
 
     // const imagePath = path.join(__dirname,'../public/template/images/products/');
     // const fileUpload = new Resize(imagePath);
@@ -33,6 +33,23 @@ exports.category = function (req, res, next){
          res.redirect('/category');
        }
      });
+    console.log("name:", name);
+    console.log("code:", code);
+
+    const imagePath = path.join(__dirname,'../public/template/images/products/');
+    const fileUpload = new Resize(imagePath);
+    if(!req.file){
+      res.status(401).json({error: 'Please provide an image'});
+    }
+    const filename = await fileUpload.save(req.file.buffer);
+    const image = "/template/images/categories/"+filename;
+    Category.addCategory(name, code, image, function(err,result){
+      if(err){
+        res.err(err);
+      }else{
+        res.redirect('/category');
+      }
+    });
   }
 
   exports.delete = function (req, res, next) {
@@ -44,7 +61,7 @@ exports.category = function (req, res, next){
     });
   }
   
-  exports.edit = function (req, res, next) {
+  exports.edit = async function (req, res, next) {
     var code = req.body.code;
     var name = req.body.name;
     // const imagePath = path.join(__dirname,'../public/template/images/products/');
@@ -58,5 +75,16 @@ exports.category = function (req, res, next){
          res.redirect('/category');
        }
    });
+    const imagePath = path.join(__dirname,'../public/template/images/products/');
+    const fileUpload = new Resize(imagePath);
+    const filename = await fileUpload.save(req.file.buffer);
+    const image = "/template/images/categories/"+filename;
+
+    Category.editCategory(req.query.id, name, code, image, function (err, result) {
+      if (err) { return next(err); }
+      else {
+        res.redirect('/category');
+      }
+    });
   }
 

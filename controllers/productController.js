@@ -11,7 +11,7 @@ exports.product = function (req, res, next) {
 exports.product_list = function(req,res,next){
   async.parallel({
     listCategory: function(cb){
-      Category.all(cb);
+      Category.getAllCategory(cb);
     },
     listProduct: function(cb){
       Product.all(cb);
