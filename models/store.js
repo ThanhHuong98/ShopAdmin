@@ -8,7 +8,7 @@ exports.getAllStore = function(callBack)
     // collection.find().toArray(function(err, result){
     //     callBack(err, result);
     // });
-    collection.aggregate([{$sample: {size: 6}}]).toArray(function (err, result) {
+    collection.find().toArray(function (err, result) {
         callBack(err, result);
     });
 }
