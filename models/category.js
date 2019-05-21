@@ -6,8 +6,12 @@ exports.getAllCategory = function(callBack)
 {
     var collection = db.get().collection('Category');
 
-    collection.find().toArray(function(err, docs){
-        callBack(err, docs)
+    // collection.find().toArray(function(err, docs){
+    //     callBack(err, docs)
+    // });
+
+    collection.aggregate([{$sample: {size: 4}}]).toArray(function (err, result) {
+        callBack(err, result);
     });
 }
 
@@ -22,7 +26,6 @@ exports.findCategory = function(id, callBack)
 exports.addCategory = function(name, code, img, callBack)
 {
     var collection = db.get().collection('Category');
-
     collection.insertOne({
         code : code,
         name : name,

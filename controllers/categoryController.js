@@ -18,32 +18,20 @@ exports.category = function (req, res, next){
     var code = req.body.code;
     var name = req.body.name;
 
+    console.log("name:", name);
+    console.log("code:", code);
 
-    // const imagePath = path.join(__dirname,'../public/template/images/products/');
+    // const imagePath = path.join(__dirname,'../public/template/images/categories/');
     // const fileUpload = new Resize(imagePath);
     // if(!req.file){
     //   res.status(401).json({error: 'Please provide an image'});
     // }
     // const filename = await fileUpload.save(req.file.buffer);
-    // const image = "/template/images/categories/"+filename;
-     Category.addCategory(name, code, "", function(err,result){
-       if(err){
-         res.err(err);
-       }else{
-         res.redirect('/category');
-       }
-     });
-    console.log("name:", name);
-    console.log("code:", code);
+    // const image = "/template/images/categories/" + filename;
+    //
+    // console.log("image:", image);
 
-    const imagePath = path.join(__dirname,'../public/template/images/products/');
-    const fileUpload = new Resize(imagePath);
-    if(!req.file){
-      res.status(401).json({error: 'Please provide an image'});
-    }
-    const filename = await fileUpload.save(req.file.buffer);
-    const image = "/template/images/categories/"+filename;
-    Category.addCategory(name, code, image, function(err,result){
+    Category.addCategory(name, code, "", function(err,result){
       if(err){
         res.err(err);
       }else{
@@ -53,10 +41,15 @@ exports.category = function (req, res, next){
   }
 
   exports.delete = function (req, res, next) {
-    Category.deleteCategory(req.query.id, function (err, result) {
+
+    const id= req.params.id;
+    console.log(id);
+
+    Category.deleteCategory(id, function (err, result) {
       if (err) { return next(err); }
       else {
         res.redirect('/category');
+        next();
       }
     });
   }
@@ -64,18 +57,8 @@ exports.category = function (req, res, next){
   exports.edit = async function (req, res, next) {
     var code = req.body.code;
     var name = req.body.name;
-    // const imagePath = path.join(__dirname,'../public/template/images/products/');
-    // const fileUpload = new Resize(imagePath);
-    // const filename = await fileUpload.save(req.file.buffer);
-    // const image = "/template/images/categories/"+filename;
-    //
-     Category.editCategory(req.query.id, name, code, "", function (err, result) {
-       if (err) { return next(err); }
-       else {
-         res.redirect('/category');
-       }
-   });
-    const imagePath = path.join(__dirname,'../public/template/images/products/');
+
+    const imagePath = path.join(__dirname,'../public/template/images/categories/');
     const fileUpload = new Resize(imagePath);
     const filename = await fileUpload.save(req.file.buffer);
     const image = "/template/images/categories/"+filename;

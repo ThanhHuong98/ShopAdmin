@@ -54,6 +54,7 @@ exports.editStore = async function(req, res, next)
   var name = req.body.name;
   var describe = req.body.describe;
   var address = req.body.address;
+
   const imagePath = path.join(__dirname,'../public/template/images/stores/');
     const fileUpload = new Resize(imagePath);
     if(!req.file){
