@@ -18,9 +18,12 @@ router.get('/user/delete', user_controller.delete);
 router.get('/order', order_controller.order );
 router.get('/product',product_controller.product_list);
 router.get('/product/delete/:id',product_controller.delete);
+
 router.get('/category',category_controller.category);
 router.get('/category/delete',category_controller.delete);
 router.get('/category/edit', category_controller.edit);
+router.get('category/create',category_controller.addCategory)
+
 router.get('/store', store_controller.store);
 
 

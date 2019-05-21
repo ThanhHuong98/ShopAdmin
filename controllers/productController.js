@@ -24,13 +24,14 @@ exports.product_list = function(req,res,next){
     }
   })
 }
+
 exports.add =  async function(req,res,next){  
   const name = req.body.name;
   const info = req.body.info;
   const category = req.body.category;
   const price = req.body.price;
   const quantity = req.body.quantity;
-  
+
   const imagePath = path.join(__dirname,'../public/template/images/products/');
   const fileUpload = new Resize(imagePath);
   if(!req.file){
