@@ -50,15 +50,15 @@ exports.addStore = async function(req, res, next)
 
 exports.editStore = async function(req, res, next)
 {
-  var id = req.query.id;
+  var id = req.body.id;
   var name = req.body.name;
   var describe = req.body.describe;
   var address = req.body.address;
   const imagePath = path.join(__dirname,'../public/template/images/stores/');
-    const fileUpload = new Resize(imagePath);
-    if(!req.file){
-      res.status(401).json({error: 'Please provide an image'});
-    }
+  const fileUpload = new Resize(imagePath);
+  if(!req.file){
+    res.status(401).json({error: 'Please provide an image'});
+  }
   const filename = await fileUpload.save(req.file.buffer);
   const image =  "/template/images/stores/" + filename;
 
