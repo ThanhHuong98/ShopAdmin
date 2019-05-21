@@ -98,7 +98,7 @@
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
         style="display: none;">
-        <form class="edit-form" id="my-form" method="POST">
+        <form class="edit-form" id="my-form" method="POST" enctype="multipart/form-data">>
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header header-panel">
@@ -122,8 +122,8 @@
                                     </div>
                                 </div>
                             <label class="col-form-label">Hình ảnh</label>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <section class="thumbnail-container">
                                     <div class="thumbnail-container--content image-box" for="image-upload">
                                         <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple=""
@@ -134,7 +134,11 @@
                                         </label>
                                     </div>
                                 </section>
+                            </div>
 
+                            <div class="form-group">
+                                <input type="text" name='id' id="txt-category-id"
+                                       style="height: 0px; width: 0px; visibility: hidden;">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -160,30 +164,29 @@
 
 
     <script>
-        $(".create-category").click(function () {
-                var ref = "/category/create"
-                $(".name").val("");
-                $(".code").val("");
-                $('#txt-category-image').attr('src', 'images/imageHolder.png');
-                $(".edit-form").attr('action', ref);
+        $("#btn-add-category").click(function () {
+            $("#my-form").attr('action', '/category/create');
+            $('#txt-category-name').attr('placeholder', '');
+            $('#txt-category-code').attr('placeholder', '');
+            $('#txt-category-image').attr('src', 'images/imageHolder.png');
         })
 
         $(".btn-edit-category").click(function () {
             var id = $(this).data('id');
             $("#my-form").attr('action', '/category/edit?id=' + id);
-            var name = $(this).parent().find("#category-name").text();
-            var image = $(this).parent().find("#category-image").attr('src');
-            var code = $(this).parent().find("#category-code").text();
+            var name = $(this).parent().parent().find('#category-name').text();
+            var code = $(this).parent().parent().find('#category-code').text();
+            var image = $(this).parent().parent().find('#category-image').attr('src');
 
             $('#txt-category-name').attr('placeholder', name);
-            $('#txt-category-image').attr('src', image);
             $('#txt-category-code').attr('placeholder', code);
+            $('#txt-category-image').attr('src', image);
+            $('#txt-category-id').attr('value', id);
 
-            //$('#txt-product-id').attr('value', id);
         })
 
         var loadFile = function (event) {
-            var image = document.getElementById('txt-product-image');
+            var image = document.getElementById('txt-category-image');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
 
