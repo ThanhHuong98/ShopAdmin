@@ -13,8 +13,8 @@ const upload = require('../uploadMiddleware');
 /* GET home page. */
 router.get('/', home_controller.index);
 router.get('/user',user_controller.user );
-router.get('/user/edit', user_controller.edit);
-router.get('/user/delete', user_controller.delete);
+router.post('/user/edit', user_controller.edit);
+router.get('/user/delete/:id', user_controller.delete);
 router.get('/order', order_controller.order );
 router.get('/order/update', order_controller.updateStatus);
 

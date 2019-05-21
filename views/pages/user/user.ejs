@@ -59,23 +59,21 @@
                                     <tbody>
                                         <%listCustomer.forEach(function(customer){ %>
                                         <tr>
-                                            <td class="style-middle-center user-name"><%=customer.name%></td>
-                                            <td class="style-middle-center user-address"><%=customer.address%></td>
-                                            <td class="style-middle-center user-phone"><%=customer.phone%></td>
+                                            <td class="style-middle-center user-name" id="name_user"><%=customer.name%></td>
+                                            <td class="style-middle-center user-address" id="address_user"><%=customer.address%></td>
+                                            <td class="style-middle-center user-phone" id="phone_user"><%=customer.phone%></td>
                                             <td class="style-middle-center user-created-time"><%=customer.update%></td>
                                             <td class="style-middle-center">
-                                                    <a class="open-dialog" data-toggle="modal" data-target="#myModal"
-                                                        data-id="<%=customer._id%>" style="text-decoration: none">
-                                                        <button class="btn btn-outline-primary" type="button">
-                                                            <i class="fa fa-edit"></i>
-                                                        </button>
-                                                    </a>
-                                                    <a href="/category/detele?id=<%=customer._id%>">
-                                                        <button class="btn btn-outline-primary" type="button">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </a>
-                                                </td>
+
+                                                <button class="btn btn-outline-primary btn-edit-customer" type="button"
+                                                        data-toggle="modal" data-target="#myModal"
+                                                        data-id="<%=customer._id%>">
+                                                    <i class="fa fa-edit"></i></button>
+
+                                                <a class="btn btn-outline-primary btn-delete-user" type="button"
+                                                   href="/user/delete/<%=customer._id%>">
+                                                    <i class="far fa-trash-alt"></i></a>
+                                              </td>
                                         </tr>
                                     <% }); %>
                                     </tbody>
@@ -142,8 +140,8 @@
                                         <%listCustomerNew.forEach(function(customer){ %>
                                         <tr>
                                             <td>1</td>
-                                            <td class="style-middle-center"><%=customer.name%></td>
-                                            <td class="style-middle-center"><%=customer.phone%></td>
+                                            <td class="style-middle-center" ><%=customer.name%></td>
+                                            <td class="style-middle-center" ><%=customer.phone%></td>
                                             <td class="style-middle-center"><%=customer.address%></td>
                                         </tr>
                                         <% }); %>
@@ -163,7 +161,7 @@
     <% include ../../partials/footer.ejs %>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
         style="display: none;">
-        <form class="edit-form" method="POST">
+        <form class="edit-form" id="my-form"  method="POST">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header header-panel">
@@ -176,19 +174,21 @@
                             <div class="form-group row">
                                 <label class="col-lg-2 col-md-2 col-form-label">Họ tên</label>
                                 <div class="col-lg-10 col-md-10">
-                                    <input class="form-control ng-untouched ng-pristine ng-valid name" type="text">
+                                    <input class="form-control ng-untouched ng-pristine ng-valid name" type="text" id="txt-name" name ="name">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-2 col-md-2 col-form-label">Địa chỉ</label>
                                 <div class="col-lg-10 col-md-10">
-                                    <input class="form-control ng-pristine ng-valid ng-touched address" type="text">
+                                    <input class="form-control ng-pristine ng-valid ng-touched address" type="text" id="txt-address" name="address">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-2 col-md-2 col-form-label">Số điện thoại</label>
                                 <div class="col-lg-10 col-md-10">
-                                    <input class="form-control ng-pristine ng-valid ng-touched phone" type="number">
+                                    <input class="form-control ng-pristine ng-valid ng-touched phone" type="number" id="txt-phone" name="phone">
+                                    <input type="text" name='id' id="txt-user-id"
+                                           style="height: 0px; width: 0px; visibility: hidden;">
                                 </div>
                             </div>
                         </div>
@@ -214,17 +214,40 @@
     <script src="javascripts/custom.js"></script>
 
     <script>
-        $(".open-dialog").click(function () {
-            var name = $(".open-dialog").parent().parent().find(".user-name").text();
-            var address = $(".open-dialog").parent().parent().find(".user-address").text();
-            var phone = $(".open-dialog").parent().parent().find(".user-phone").text();
-            var id = $(".open-dialog").data("id");
-            var ref = "user/edit?id=" + id;
-            $(".name").val(name);
-            $(".address").val(address);
-            $(".phone").val(phone);
-            $(".edit-form").attr('action', ref);
+        $(".btn-edit-customer").click(function () {
+            var id = $(this).data('id');
+            $("#my-form").attr('action', '/user/edit?id=' + id);
+            var name = $(this).parent().parent().find('#name_user').text();
+            var address = $(this).parent().parent().find('#address_user').text();
+            var phone = $(this).parent().parent().find('#phone_user').text();
+
+            $('#txt-name').attr('placeholder', name);
+            $('#txt-address').attr('placeholder',address);
+            $('#txt-phone').attr('placeholder', phone);
+
+            $('#txt-user-id').attr('value', id);
         })
+
+
+        // $(".btn-edit-product").click(function () {
+        //     var id = $(this).data('id');
+        //     $("#my-form").attr('action', '/product/edit?id=' + id);
+        //     var name = $(this).parent().parent().find('#product-name').text();
+        //     var image = $(this).parent().parent().find('#product-image').attr('src');
+        //     var info = $(this).parent().parent().find('#product-info').text();
+        //     var price = $(this).parent().parent().find('#product-price').text();
+        //     var quantity = $(this).parent().parent().find('#product-quantity').text();
+        //     var category = $(this).parent().parent().find('#product-category').text().trim();
+        //     $('#txt-product-name').attr('placeholder', name);
+        //     $('#txt-product-image').attr('src', image);
+        //     $('#txt-product-info').attr('placeholder', info);
+        //     $('#txt-product-price').attr('placeholder', price);
+        //     $('#txt-product-quantity').attr('placeholder', quantity);
+        //     $("#category-list option").filter(function () {
+        //         return $(this).text() == category;
+        //     }).attr('selected', true);
+        //     $('#txt-product-id').attr('value', id);
+        // })
     </script>
 </body>
 

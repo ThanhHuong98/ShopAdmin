@@ -1,4 +1,5 @@
 var  db = require('../db');
+var ObjectId = require('mongodb').ObjectID;
 
 // read all customer
 exports.allCustomer = function (cb) {
