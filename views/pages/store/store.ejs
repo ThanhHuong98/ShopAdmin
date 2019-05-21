@@ -8,7 +8,7 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>FREE RESPONSIVE HORIZONTAL ADMIN</title>
+    <title>Floral - Store</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -30,93 +30,27 @@
             </div>
             <span class="col-md-12 input-group-prepend" style="text-align: right">
                 <span>Thêm cửa hàng</span>
-                <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#myModal">
+                <button class="btn btn-outline-primary create-store create-store" type="button" data-toggle="modal" data-target="#myModal">
                     <i class="fa fa-plus-square"></i>
                 </button>
             </span>
         </div>
            <div class="row">
+               <%listStore.forEach(function(store){ >
                 <div class="col-md-4 col-sm-4">
                     <div class="panel" data-toggle="modal" data-target="#myModal">
-                        <div class="panel-heading header-panel">
-                            Floral Store Nguyễn Văn Cừ
+                        <div class="panel-heading header-panel store-name">
+                            <%store.name>
                         </div>
                         <div class="panel-body" style="text-align: center">
-                            <img class="img-store" src="images/store1.jpg">
+                            <img class="img-store" src="<%store.image>">
                         </div>
-                        <div class="panel-footer">
-                            231 Nguyễn Văn Cừ, phường 4, quận 5, TP.HCM
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="panel" data-toggle="modal" data-target="#myModal">
-                        <div class="panel-heading header-panel">
-                            Floral Store Trần Hưng Đạo
-                        </div>
-                        <div class="panel-body" style="text-align: center">
-                            <img class="img-store" src="images/store2.jpg">
-                        </div>
-                        <div class="panel-footer">
-                            135 Trần Hưng Đạo, phường 4, quận 1, TP.HCM
+                        <div class="panel-footer store-address">
+                            <%store.address>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="panel" data-toggle="modal" data-target="#myModal">
-                        <div class="panel-heading header-panel">
-                            Floral Store Thảo Điền
-                        </div>
-                        <div class="panel-body" style="text-align: center;">
-                            <img class="img-store" src="images/store3.jpg">
-                        </div>
-                        <div class="panel-footer">
-                            Vincom Thảo Điền, 161 XLHN, quận 2, TP.HCM
-                        </div>
-                    </div>
-                </div>
-            </div>
-                   <!-- /. ROW  -->
-            <div class="row">
-                <div class="col-md-4 col-sm-4">
-                    <div class="panel" data-toggle="modal" data-target="#myModal">
-                        <div class="panel-heading header-panel">
-                            Floral Store Lương Nhữ Hộc
-                        </div>
-                        <div class="panel-body" style="text-align: center">
-                            <img class="img-store" src="images/store4.jpg">
-                        </div>
-                        <div class="panel-footer">
-                            112 Lương Nhữ Hộc, Hải Châu, TP.Đà Nẵng
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="panel" data-toggle="modal" data-target="#myModal">
-                        <div class="panel-heading header-panel">
-                            Floral Store Âu Cơ
-                        </div>
-                        <div class="panel-body" style="text-align: center">
-                            <img class="img-store" src="images/store5.jpg">
-                        </div>
-                        <div class="panel-footer">
-                            567 Âu Cơ, phường 2, TP.Hà Nội
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="panel" data-toggle="modal" data-target="#myModal">
-                        <div class="panel-heading header-panel">
-                            Floral Store Trường Chinh
-                        </div>
-                        <div class="panel-body">
-                            <img class="img-store" src="images/store6.jpg">
-                        </div>
-                        <div class="panel-footer">
-                            32E/120 Trường Chinh, phường Thanh Xuân, quận Hoàn Kiếm, Hà Nội
-                        </div>
-                    </div>
-                </div>
+                <% }); >
             </div>
     </div>
     </div>
@@ -124,6 +58,7 @@
     <%include ../../partials/footer.ejs%>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <form class="edit-form" method="POST">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header header-panel">
@@ -135,13 +70,13 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
                             <div class="col-lg-10 col-md-10">
-                                <input class="form-control" type="text">
+                                <input class="form-control name" type="text">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-2 col-form-label">Địa chỉ</label>
                             <div class="col-lg-10 col-md-10">
-                                <input class="form-control" type="text">
+                                <input class="form-control address" type="text">
                             </div>
                         </div>
                         <label class="col-form-label">Hình ảnh</label>
@@ -155,18 +90,15 @@
                                 </div>
                             </section>
                         </div>
-                        <div class="form-group">
-                            <label>Mô tả</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-primary">Lưu thay đổi</button>
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 
     <!-- FOOTER SECTION END-->
@@ -177,5 +109,30 @@
     <script src="javascripts/bootstrap.js"></script>
       <!-- CUSTOM SCRIPTS  -->
     <script src="javascripts/custom.js"></script>
+
+    <script>
+        $(".create-store").click(function () {
+                var ref = "store/add"
+                $(".name").val("");
+                $(".address").val("");
+                $(".img-dialog").attr('src', "images/imageHolder.png");
+                $(".edit-form").attr('action', ref);
+        })
+
+        $(".open-dialog").click(function () {
+            var name = $(this).parent().find(".store-name").text();
+            var address = $(this).parent().find(".store-address").text();
+            var img = $(this).parent().find(".img-store").find(".img-store").attr('src');
+            var id = $(this).data("id");
+            var ref = "store/edit?id=" + id;
+            $(".name").val(name);
+            $(".img-dialog").attr('src', img);
+            $(".edit-form").attr('action', ref);
+        })
+        var loadFile = function (event) {
+        var image = document.getElementById('txt-store-image');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
 </body>
 </html>
