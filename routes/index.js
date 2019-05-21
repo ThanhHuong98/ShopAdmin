@@ -17,24 +17,22 @@ router.get('/user/edit', user_controller.edit);
 router.get('/user/delete', user_controller.delete);
 router.get('/order', order_controller.order );
 router.get('/order/update', order_controller.updateStatus);
+
 router.get('/product',product_controller.product_list);
 router.get('/product/delete/:id',product_controller.delete);
+router.post('/product/add',upload.single('image'), product_controller.add);
+router.post('/product/edit',upload.single('image'), product_controller.edit);
 
 router.get('/category',category_controller.category);
-router.get('/category/create', category_controller.addCategory)
 router.get('/category/delete',category_controller.delete);
-router.get('/category/edit', category_controller.edit);
+router.post('/category/edit', category_controller.edit);
 router.get('category/create',category_controller.addCategory)
 
 router.get('/store', store_controller.store);
-router.get('/store/add', store_controller.add);
-router.get('/store/edit', store_controller.editStore);
-router.get('/store/delete', store_controller.deleteStore);
+router.post('/store/add',upload.single('image'), store_controller.addStore);
+router.post('/store/edit',upload.single('image'), store_controller.editStore);
+router.get('/store/delete/:id', store_controller.deleteStore);
 
-
-//router.get('',product_controller.addProduct);
-router.post('/product/add',upload.single('image'), product_controller.add);
-router.post('/product/edit',upload.single('image'), product_controller.edit);
 
 module.exports = router;
 

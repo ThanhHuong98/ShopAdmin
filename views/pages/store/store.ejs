@@ -17,6 +17,9 @@
     <link href="stylesheets/style.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- ICON -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
 </head>
 <body>
@@ -30,27 +33,31 @@
             </div>
             <span class="col-md-12 input-group-prepend" style="text-align: right">
                 <span>Thêm cửa hàng</span>
-                <button class="btn btn-outline-primary create-store create-store" type="button" data-toggle="modal" data-target="#myModal">
+                <button class="btn btn-outline-primary create-store create-store" type="button" data-toggle="modal" data-target="#myModal"
+                        id="btn-add-store">
                     <i class="fa fa-plus-square"></i>
                 </button>
             </span>
         </div>
            <div class="row">
-               <%listStore.forEach(function(store){ >
-                <div class="col-md-4 col-sm-4">
+
+               <%listStore.forEach(function(store){ %>
+
+                <div class="col-md-4 col-sm-4" id="open-dialog" data-id="<%=store._id%>">
                     <div class="panel" data-toggle="modal" data-target="#myModal">
-                        <div class="panel-heading header-panel store-name">
-                            <%store.name>
+                        <div class="panel-heading header-panel store-name" id="store-name">
+                            <%=store.name%>
                         </div>
-                        <div class="panel-body" style="text-align: center">
-                            <img class="img-store" src="<%store.image>">
+                        <div class="panel-body" style="text-align: center" id="store-image">
+                            <img class="img-store" src="<%=store.image%>">
                         </div>
-                        <div class="panel-footer store-address">
-                            <%store.address>
+                        <div class="panel-footer store-address" id="store-address">
+                            <%=store.address%>
                         </div>
                     </div>
                 </div>
-                <% }); >
+                <% }); %>
+
             </div>
     </div>
     </div>
@@ -58,7 +65,8 @@
     <%include ../../partials/footer.ejs%>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-        <form class="edit-form" method="POST">
+
+        <form class="edit-form" method="POST" id="my-form" enctype="multipart/form-data">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header header-panel">
@@ -70,22 +78,29 @@
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
                             <div class="col-lg-10 col-md-10">
-                                <input class="form-control name" type="text">
+                                <input class="form-control name" type="text" id="txt-store-name" name='name'>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-2 col-md-2 col-form-label">Địa chỉ</label>
                             <div class="col-lg-10 col-md-10">
-                                <input class="form-control address" type="text">
+                                <input class="form-control address" type="text" id="txt-store-address" name='address'>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-md-2 col-form-label">Mô tả</label>
+                            <div class="col-lg-10 col-md-10">
+                                <input class="form-control name" type="text" id="txt-store-des"  name='describe'>
                             </div>
                         </div>
                         <label class="col-form-label">Hình ảnh</label>
                         <div class="form-group">
                             <section class="thumbnail-container">
                                 <div class="thumbnail-container--content image-box" for="image-upload">
-                                    <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple="" style="display: none;" type="file">
+                                    <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple="" style="display: none;"
+                                           type="file" name="image" onchange="loadFile(event)">
                                     <label class="style-pointer" for="image-upload" style="max-height: 100%; max-width: 100%">
-                                        <img class="img-dialog" src="images/imageHolder.png">
+                                        <img class="img-dialog" src="images/imageHolder.png" id="txt-store-image">
                                     </label>
                                 </div>
                             </section>
@@ -95,6 +110,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                     <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                    <button type="button" class="btn btn-primary">Xóa</button>
                 </div>
             </div>
         </div>
@@ -110,28 +126,32 @@
       <!-- CUSTOM SCRIPTS  -->
     <script src="javascripts/custom.js"></script>
 
+        <!--    Add new Store-->
     <script>
-        $(".create-store").click(function () {
-                var ref = "store/add"
-                $(".name").val("");
-                $(".address").val("");
-                $(".img-dialog").attr('src', "images/imageHolder.png");
-                $(".edit-form").attr('action', ref);
+        $("#btn-add-store").click(function () {
+            $("#my-form").attr('action', '/store/add');
+            $('#txt-store-name').attr('placeholder', '');
+            $('#txt-store-des').attr('placeholder', '');
+            $('#txt-store-image').attr('src', 'images/imageHolder.png');
+            $('#txt-store-address').attr('placeholder', '');
         })
 
-        $(".open-dialog").click(function () {
-            var name = $(this).parent().find(".store-name").text();
-            var address = $(this).parent().find(".store-address").text();
-            var img = $(this).parent().find(".img-store").find(".img-store").attr('src');
-            var id = $(this).data("id");
-            var ref = "store/edit?id=" + id;
-            $(".name").val(name);
-            $(".img-dialog").attr('src', img);
-            $(".edit-form").attr('action', ref);
+        $("#open-dialog").click(function () {
+            var id = $(this).data('id');
+            $("#my-form").attr('action', '/store/edit?id=' + id);
+            var name = $(this).parent().find("#store-name").text();
+            var address = $(this).parent().find("#store-address").text();
+            var img = $(this).parent().find("#store-image").attr('src');
+
+            $('#txt-store-name').attr('placeholder',name);
+            $('#txt-store-des').attr('placeholder', 'Thanh Huong');
+            $('#txt-store-image').attr('src', img);
+            $('#txt-store-address').attr('placeholder', address);
         })
+
         var loadFile = function (event) {
-        var image = document.getElementById('txt-store-image');
-        image.src = URL.createObjectURL(event.target.files[0]);
+            var image = document.getElementById('txt-store-image');
+            image.src = URL.createObjectURL(event.target.files[0]);
         };
     </script>
 </body>

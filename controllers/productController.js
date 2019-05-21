@@ -38,7 +38,7 @@ exports.add =  async function(req,res,next){
     res.status(401).json({error: 'Please provide an image'});
   }
   const filename = await fileUpload.save(req.file.buffer);
-  const image = "/template/images/products/"+filename;
+  const image = "/template/images/products/" + filename;
   Product.add(name,info,category,price,quantity,image,function(err,result){
     if(err){
       res.err(err);

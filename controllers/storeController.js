@@ -1,4 +1,5 @@
 var Store = require('../models/store');
+var async = require('async');
 const Resize = require('../resize');
 var path = require('path');
 
@@ -9,26 +10,34 @@ exports.store = function(req, res, next) {
     { return next(err); }
     else
     {
-    res.render('pages/store/store', {listStore : result});
+    res.render('pages/store/store', {listStore : docs});
     }
   });
 }
 
-exports.addStore = function(req, res, next)
+exports.addStore = async function(req, res, next)
 {
   var name = req.body.name;
   var describe = req.body.describe;
   var address = req.body.address;
-  const imagePath = path.join(__dirname,'../public/template/images/products/');
+
+  console.log("Add new store: ")
+  console.log("name:", name);
+  console.log("describe:", describe);
+  console.log("address:", address);
+
+  const imagePath = path.join(__dirname,'../public/template/images/stores/');
     const fileUpload = new Resize(imagePath);
     if(!req.file){
       res.status(401).json({error: 'Please provide an image'});
     }
   const filename = await fileUpload.save(req.file.buffer);
-  const image = "/template/images/categories/"+filename;
+  const image = "/template/images/stores/" + filename;
+
+  console.log("image:", image);
 
   Store.addStore(name, describe, image, address, function(err, result){
-    if(err)
+      if(err)
     {
       return next(err);
     }
@@ -39,19 +48,19 @@ exports.addStore = function(req, res, next)
   });
 }
 
-exports.editStore = function(req, res, next)
+exports.editStore = async function(req, res, next)
 {
   var id = req.query.id;
   var name = req.body.name;
   var describe = req.body.describe;
   var address = req.body.address;
-  const imagePath = path.join(__dirname,'../public/template/images/products/');
+  const imagePath = path.join(__dirname,'../public/template/images/stores/');
     const fileUpload = new Resize(imagePath);
     if(!req.file){
       res.status(401).json({error: 'Please provide an image'});
     }
   const filename = await fileUpload.save(req.file.buffer);
-  const image = "/template/images/categories/"+filename;
+  const image =  "/template/images/stores/" + filename;
 
   Store.editStore(id, name, describe, image, address, function(err, result){
     if(err)
@@ -67,7 +76,9 @@ exports.editStore = function(req, res, next)
 
 exports.deleteStore = function(req, res, next)
 {
-  var id = req.query.id;
+  const id= req.params.id;
+  console.log("id store deleted:", id);
+
   Store.deleteStore(id, function(err, result){
     if(err)
     {
@@ -76,6 +87,7 @@ exports.deleteStore = function(req, res, next)
     else
     {
       res.redirect('/store');
+      next();
     }
   })
 }

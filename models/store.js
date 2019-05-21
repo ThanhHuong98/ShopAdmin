@@ -4,7 +4,11 @@ var ObjectId = require('mongodb').ObjectID;
 exports.getAllStore = function(callBack)
 {
     var collection = db.get().collection('Store');
-    collection.find().toArray(function(err, result){
+
+    // collection.find().toArray(function(err, result){
+    //     callBack(err, result);
+    // });
+    collection.aggregate([{$sample: {size: 6}}]).toArray(function (err, result) {
         callBack(err, result);
     });
 }
@@ -12,7 +16,7 @@ exports.getAllStore = function(callBack)
 exports.addStore = function(name, describe, img, address, callBack)
 {
     var collection = db.get().collection('Store');
-    collection.addOne({
+    collection.insert({
         name : name,
         describe : describe,
         image : img,
