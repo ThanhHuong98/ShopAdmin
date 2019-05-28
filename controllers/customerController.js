@@ -1,7 +1,48 @@
 
 var Customer = require('../models/customer');
 var async = require('async');
+var bcrypt = require('bcrypt');
 
+exports.login = function(req, res, next){
+    res.render('pages/account/login');
+}
+
+exports.verifyAccount = function(req, res, next){
+    var email = req.body.email;
+    var password = req.body.password;
+    console.log("VERIFY ACCOUNT:", email, password);
+    Customer.verifyAccount(email, password, function(err, user){
+        if(err){
+            return next(err);
+        }
+        else
+        {
+           if(user == undefined || user.length == 0) {
+            res.redirect('/');
+           }
+           else {
+            //     bcrypt.compare(password, user.pass, function (err, result) {
+            //                     if (result == true) {
+            //                         //res.redirect('/home');
+            //                         res.render('pages/home/index');
+                                
+            //                     } else {
+            //                     res.send('Incorrect password');
+            //                     res.render('pages/account/login');
+            //                     //res.redirect('/');
+            //                     }
+            //    });
+                var role = user[0].role;
+                console.log("ROLE: ", role);
+                if(role==undefined) res.redirect('/');
+                else if(role == 1){
+                   res.redirect('/home');
+                }
+           }
+
+        }
+    });
+}
 exports.user = function(req, res, next) {
 
     async.parallel({

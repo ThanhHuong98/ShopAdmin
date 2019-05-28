@@ -15,7 +15,7 @@
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-    <title>COFFEE STORE</title>
+    <title>FLORAL ADMIN</title>
     <link href="stylesheets/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
     <link href="stylesheets/font-awesome.css" rel="stylesheet" />
@@ -37,51 +37,60 @@
     <router-outlet></router-outlet>
     <app-dashboard _nghost-c0="">
         <div _ngcontent-c0="" class="app-body">
-            <main _ngcontent-c0="" class="main d-flex align-items-center">
-                <div _ngcontent-c0="" class="container">
-                    <div _ngcontent-c0="" class="row">
-                        <div _ngcontent-c0="" class="col-md-8 mx-auto">
-                            <div _ngcontent-c0="" class="card-group">
-                                <div _ngcontent-c0="" class="card text-white card-text-white">
-                                    <div _ngcontent-c0="" class="card-body text-center rx-text-center card-bodyLogin">
-                                        <div _ngcontent-c0=""><img _ngcontent-c0="" src="images/Floral.png">
+                    <main _ngcontent-c0="" class="main d-flex align-items-center" style="margin-top: 200px;">
+                        <div _ngcontent-c0="" class="container">
+                            <div _ngcontent-c0="" class="row">
+                                <div _ngcontent-c0="" class="col-md-8 mx-auto">
+                                    <div _ngcontent-c0="" class="card-group">
+                                        <div _ngcontent-c0="" class="card text-white card-text-white">
+                                            <div _ngcontent-c0="" class="card-body text-center rx-text-center card-bodyLogin">
+                                                <div _ngcontent-c0=""><img _ngcontent-c0="" src="template/images/categories/autumn.jpg">
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div _ngcontent-c0="" class="card p-4">
-                                    <div _ngcontent-c0="" class="card-body">
-                                        <form _ngcontent-c0="" novalidate="" class="ng-untouched ng-pristine ng-valid">
-                                            <h1 _ngcontent-c0="">ĐĂNG NHẬP</h1>
-                                            <p _ngcontent-c0="" class="text-muted"></p>
-                                            <div _ngcontent-c0="" class="input-group mb-3">
-                                                <div _ngcontent-c0="" class="input-group-prepend"><span _ngcontent-c0=""
-                                                        class="input-group-text"><i _ngcontent-c0=""
-                                                            class="fa fa-user"></i></span></div><input _ngcontent-c0=""
-                                                    class="form-control ng-dirty ng-touched ng-invalid" required=""
-                                                    type="text" placeholder="Tên đăng nhập">
+                                        <div _ngcontent-c0="" class="card p-4">
+                                            <div _ngcontent-c0="" class="card-body">
+                                                <form method="POST" id="my-form" _ngcontent-c0="" novalidate="" class="ng-untouched ng-pristine ng-valid" action="/">
+                                                    <h1 _ngcontent-c0="">ĐĂNG NHẬP</h1>
+                                                    <p _ngcontent-c0="" class="text-muted"></p>
+                                                    <div _ngcontent-c0="" class="input-group mb-3">
+                                                        <div _ngcontent-c0="" class="input-group-prepend"><span _ngcontent-c0=""
+                                                                class="input-group-text"><i _ngcontent-c0=""
+                                                                    class="fa fa-user"></i></span>
+                                                        </div>
+                                                        <input _ngcontent-c0=""
+                                                            name='email' id="email"
+                                                            class="form-control ng-dirty ng-touched ng-invalid" required=""
+                                                            type="text" placeholder="Email đăng nhập">
+                                                    </div>
+                                                    <div _ngcontent-c0="" class="input-group mb-4">
+                                                        <div _ngcontent-c0="" class="input-group-prepend"><span _ngcontent-c0=""
+                                                                class="input-group-text"><i _ngcontent-c0=""
+                                                                    class="fa fa-lock"></i></span>
+                                                        </div>
+                                                        <input _ngcontent-c0=""
+                                                            name='password' id="password"
+                                                            class="form-control ng-dirty ng-touched ng-invalid" name="password"
+                                                            required="" type="password" placeholder="Mật khẩu">
+                                                    </div>
+                                                    <hr _ngcontent-c0="">
+                                                    <div _ngcontent-c0="" class="row">
+                                                        <div _ngcontent-c0="" class="col-6">
+                                                            <button _ngcontent-c0=""
+                                                                type="submit"
+                                                                class="btn btn-info px-4 active" style="width: 100%"
+                                                                type="button">Đăng nhập</button>
+                                                        </div>
+                                                        <div _ngcontent-c0="" class="col-6 text-right"></div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div _ngcontent-c0="" class="input-group mb-4">
-                                                <div _ngcontent-c0="" class="input-group-prepend"><span _ngcontent-c0=""
-                                                        class="input-group-text"><i _ngcontent-c0=""
-                                                            class="fa fa-lock"></i></span></div><input _ngcontent-c0=""
-                                                    class="form-control ng-dirty ng-touched ng-invalid" name="password"
-                                                    required="" type="password" placeholder="Mật khẩu">
-                                            </div>
-                                            <hr _ngcontent-c0="">
-                                            <div _ngcontent-c0="" class="row">
-                                                <div _ngcontent-c0="" class="col-6"><button _ngcontent-c0=""
-                                                        class="btn btn-info px-4 active" style="width: 100%"
-                                                        type="button"> Đăng nhập </button></div>
-                                                <div _ngcontent-c0="" class="col-6 text-right"></div>
-                                            </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </main>
+                    </main>
         </div>
     </app-dashboard>
 </body>

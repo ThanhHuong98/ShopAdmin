@@ -2,6 +2,7 @@ var express = require('express');
 const app = express();
 var router = express.Router();
 
+
 var home_controller = require('../controllers/homeController')
 var user_controller = require('../controllers/customerController')
 var order_controller = require('../controllers/orderController')
@@ -11,7 +12,10 @@ var store_controller = require('../controllers/storeController')
 
 const upload = require('../uploadMiddleware');
 /* GET home page. */
-router.get('/', home_controller.index);
+router.get('/', user_controller.login);
+router.post('/',user_controller.verifyAccount);
+
+router.get('/home', home_controller.index);
 router.get('/user',user_controller.user );
 router.post('/user/edit', user_controller.edit);
 router.get('/user/delete/:id', user_controller.delete);
