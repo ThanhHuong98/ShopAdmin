@@ -21,23 +21,17 @@ exports.verifyAccount = function(req, res, next){
             res.redirect('/');
            }
            else {
-            //     bcrypt.compare(password, user.pass, function (err, result) {
-            //                     if (result == true) {
-            //                         //res.redirect('/home');
-            //                         res.render('pages/home/index');
-                                
-            //                     } else {
-            //                     res.send('Incorrect password');
-            //                     res.render('pages/account/login');
-            //                     //res.redirect('/');
-            //                     }
-            //    });
-                var role = user[0].role;
-                console.log("ROLE: ", role);
-                if(role==undefined) res.redirect('/');
-                else if(role == 1){
-                   res.redirect('/home');
-                }
+                bcrypt.compare(password, user[0].pass, function (err, result) {
+                                if (result == true) {
+                                    if(user[0].role==1){
+                                        res.redirect('/home');
+                                    }else{
+                                        res.redirect('/');
+                                    }
+                                } else {
+                                    res.redirect('/');
+                                }
+               });
            }
 
         }
@@ -81,6 +75,19 @@ exports.edit = function(req, res, next)
     console.log("id = ", id);
 
     Customer.editCustomer(id,  name, address, phone, updatedTime, function (err, result) {
+        if (err) { return next(err); }
+        else {
+          res.redirect('/user');
+        }
+      });
+}
+
+exports.userAutho = function(req, res, next){
+
+    var id = req.body.id;
+    var role = 1;
+    
+    Customer.editRole(id, role,function (err, result) {
         if (err) { return next(err); }
         else {
           res.redirect('/user');

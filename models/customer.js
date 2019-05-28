@@ -13,30 +13,10 @@ exports.allCustomer = function (cb) {
 
 exports.verifyAccount = function(email, password, cb){
     var collection = db.get().collection('Customer');
-    // collection.findOne({email: email}).then(function(user){
-    //     if(!user){
-    //         //res.redirect('/');
-    //     }else{
-    //         bcrypt.compare(password, user.pass, function (err, result) {
-    //             if (result == true) {
-    //                 //res.redirect('/home');
-    //                 //result="Success";
-    //                 cb(err, result);
-    //             } else {
-    //             //  res.send('Incorrect password');
-    //             //  res.redirect('/');
-    //             result="Fail";
-    //             //cb(err, result);
-    //             }
-    //         });
-    //     }
-    // });
-
-    collection.find({email: email, pass: password}).toArray(function(err, user){
+    collection.find({email: email}).toArray(function(err, user){
             cb(err, user);
             console.log("USER", user);
         })
-
 }
 
 exports.allCustomerByType=function (mtype,cb) {
@@ -52,15 +32,28 @@ exports.editCustomer = function (id, name, address, phone, updatedTime, callBack
 {
     var collection = db.get().collection('Customer');
     collection.updateOne({_id : ObjectId(id)}, {
-        name : name,
-        address : addres,
-        phone : phone,
-        update : updatedTime
+        $set: {
+            name : name,
+            address : address,
+            phone : phone,
+            update : updatedTime
+        }
     }, function(err, result){
         callBack(err, result);
     });
 }
+exports.editRole = function(id,role,callBack){
+    var collection = db.get().collection('Customer');
 
+    collection.updateOne({_id : ObjectId(id)}, {
+        $set: {
+            role: role
+        }
+    }, function(err, result){
+        callBack(err, result);
+    });
+
+}
 exports.deleteCustomer = function (id, callBack)
 {
     var collection = db.get().collection('Customer');

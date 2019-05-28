@@ -9,7 +9,7 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>FREE RESPONSIVE HORIZONTAL ADMIN</title>
+    <title>FLORAL ADMIN</title>
     <!-- BOOTSTRAP CORE STYLE  -->
     <link href="stylesheets/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME STYLE  -->
@@ -128,6 +128,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                        <button type="" id="btn_authorization_admin" class="btn btn-primary">Cấp quyền admin</button>
                     </div>
                 </div>
             </div>
@@ -158,6 +159,15 @@
             $('#txt-phone').attr('placeholder', phone);
 
             $('#txt-user-id').attr('value', id);
+        })
+
+        $("#btn_authorization_admin").click(function(){
+            var id = $(this).data('id');
+            $("#my-form").attr('action', '/user/autho?id=' + id);
+            var name = $(this).parent().parent().find('#name_user').text();
+            var address = $(this).parent().parent().find('#address_user').text();
+            var phone = $(this).parent().parent().find('#phone_user').text();
+
         })
     </script>
 </body>
