@@ -50,6 +50,10 @@
                                         </div>
                                         <div _ngcontent-c0="" class="card p-4">
                                             <div _ngcontent-c0="" class="card-body">
+                                                <!-- show any messages that come back with authentication -->
+                                                <% if (message.length > 0) { %>
+                                                    <div class="alert alert-danger"><%= message %></div>
+                                                <% } %>
                                                 <form method="POST" id="my-form" _ngcontent-c0="" novalidate="" class="ng-untouched ng-pristine ng-valid" action="/">
                                                     <h1 _ngcontent-c0="">ĐĂNG NHẬP</h1>
                                                     <p _ngcontent-c0="" class="text-muted"></p>

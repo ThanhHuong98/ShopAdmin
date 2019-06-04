@@ -68,7 +68,6 @@ exports.deleteCustomer = function (id, callBack)
 const getUserByEmail= async(email, callBack) => { 
     var collection = await db.get().collection('Customer');
     const User = await collection.findOne({email});
-    console.log("User get", User);
     return User;
 };
 exports.getUserByEmail = getUserByEmail;

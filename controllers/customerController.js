@@ -4,7 +4,17 @@ var async = require('async');
 var bcrypt = require('bcrypt');
 
 exports.login = function(req, res, next){
-    res.render('pages/account/login');
+    console.log("message", req.message);
+    const user = req.user;
+    if(!user)
+        res.render('pages/account/login', { message: req.flash('loginMessage') });
+     else
+        res.redirect('/home');
+
+}
+exports.logout = function(req, res, next){
+    req.logout();
+    res.redirect('/');
 }
 
 exports.verifyAccount = function(req, res, next){
@@ -38,24 +48,27 @@ exports.verifyAccount = function(req, res, next){
     });
 }
 exports.user = function(req, res, next) {
+    const user = req.user;
+    if(user){
+        async.parallel({
 
-    async.parallel({
-
-        listCustomer: function (callback) {
-            Customer.allCustomer(callback);
-        },
-        listCustomerHot: function (callback) {
-            Customer.allCustomerByType("1",callback);
-        },
-        listCustomerNew: function (callback) {
-            Customer.allCustomerByType("2",callback);
-        }
-    },function(err, results){
-        if(err){res.err(err);}
-        else {
-            res.render('pages/user/user', {listCustomer: results.listCustomer,listCustomerHot: results.listCustomerHot,listCustomerNew:results.listCustomerNew  });
-        }
-    });
+            listCustomer: function (callback) {
+                Customer.allCustomer(callback);
+            },
+            listCustomerHot: function (callback) {
+                Customer.allCustomerByType("1",callback);
+            },
+            listCustomerNew: function (callback) {
+                Customer.allCustomerByType("2",callback);
+            }
+        },function(err, results){
+            if(err){res.err(err);}
+            else {
+                res.render('pages/user/user', {listCustomer: results.listCustomer,listCustomerHot: results.listCustomerHot,listCustomerNew:results.listCustomerNew  });
+            }
+        });
+    }else
+        res.redirect('/')
 }
 
 exports.edit = function(req, res, next)

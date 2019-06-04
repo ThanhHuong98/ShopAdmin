@@ -8,36 +8,38 @@ const session = require('express-session');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 var indexRouter = require('./routes/index');
+var flash=require("connect-flash");
 
 const User = require('./models/customer');
 
-passport.use(new localStrategy({usernameField: 'email'},
-    async function(username, password, done){
+passport.use(new localStrategy({usernameField: 'email', 
+                                passReqToCallback: true },// allows us to pass back the entire request to the callback},
+    async function(req, username, password, done){
       try{
         const user  = await User.getUserByEmail(username);
         console.log("User login: ", user);
         if(!user){
-            return done(null, false, {message: 'Incorrect email.'});
-            console.log('Incorrect email.');
-
+            return done(null, false, req.flash('loginMessage', 'Tên đăng nhập hoặc mật khẩu không đúng'));
         }else{
           const isPasswordValid = await User.validPassword(username, password);
           if(!isPasswordValid){
-            return done(null, false, {message:'Incorrect password' });
-            console.log('Incorrect password', isPasswordValid);
+            return done(null, false, req.flash('loginMessage', 'Tên đăng nhập hoặc mật khẩu không đúng'));
+          }else{
+            if(user.role == 1)
+              return done(null, user);
           }
-          return done(null, user);
+          
         }
       }catch(ex){
        return done(ex);
      }
     }
 ));
-
+//serialize user into session
 passport.serializeUser(function(user, done){
   done(null, user.email);
 });
-
+//deserialize user out of session
 passport.deserializeUser(function(email, done){
   const user = User.getUserByEmail(email);
   done(undefined, user);
@@ -45,8 +47,6 @@ passport.deserializeUser(function(email, done){
 
 
 var app = express();
-
-
 
 
 // view engine setup
@@ -61,6 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:"meo cats"}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 

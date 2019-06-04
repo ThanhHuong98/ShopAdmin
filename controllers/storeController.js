@@ -4,15 +4,20 @@ const Resize = require('../resize');
 var path = require('path');
 
 
-exports.store = function(req, res, next) {
-  Store.getAllStore(function(err, docs){
-    if (err) 
-    { return next(err); }
-    else
-    {
-    res.render('pages/store/store', {listStore : docs});
-    }
-  });
+exports.store = async function(req, res, next) {
+  const user = await req.user;
+  if(user){
+    Store.getAllStore(function(err, docs){
+      if (err) 
+      { return next(err); }
+      else
+      {
+      res.render('pages/store/store', {listStore : docs});
+      }
+    });
+  }else
+    res.redirect('/');
+  
 }
 
 exports.addStore = async function(req, res, next)

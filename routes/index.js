@@ -13,15 +13,19 @@ var store_controller = require('../controllers/storeController')
 const passport = require('passport');
 
 const upload = require('../uploadMiddleware');
-/* GET home page. */
+
+/* LOGIN SESSION */
 router.get('/', user_controller.login);
 //router.post('/',user_controller.verifyAccount);
-
 router.post('/', passport.authenticate('local',{
     successRedirect:'/home',
-    failureRedirect:'/'
+    failureRedirect:'/',
+    failureFlash : true // allow flash messages
+    
 }));
+router.get('/logout',user_controller.logout);
 
+/* GET home page. */
 router.get('/home', home_controller.index);
 router.get('/user',user_controller.user );
 router.post('/user/edit', user_controller.edit);

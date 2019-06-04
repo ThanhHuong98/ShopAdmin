@@ -8,21 +8,26 @@ exports.product = function (req, res, next) {
   res.render('pages/product/product');
 }
 
-exports.product_list = function(req,res,next){
-  async.parallel({
-    listCategory: function(cb){
-      Category.getAllCategory(cb);
-    },
-    listProduct: function(cb){
-      Product.all(cb);
-    }
-  },function(err,result){
-    if(err){
-      res.err(err);
-    }else{
-      res.render('pages/product/product',{listCategory: result.listCategory,listProduct: result.listProduct})
-    }
-  })
+exports.product_list = async function(req,res,next){
+  const user = await req.user;
+  if(user){
+    async.parallel({
+      listCategory: function(cb){
+        Category.getAllCategory(cb);
+      },
+      listProduct: function(cb){
+        Product.all(cb);
+      }
+    },function(err,result){
+      if(err){
+        res.err(err);
+      }else{
+        res.render('pages/product/product',{listCategory: result.listCategory,listProduct: result.listProduct})
+      }
+    })
+  }else
+    res.redirect('/');
+  
 }
 
 exports.add =  async function(req,res,next){  

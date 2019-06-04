@@ -2,15 +2,20 @@ var Category = require('../models/category');
 const Resize = require('../resize');
 var path = require('path');
 
-exports.category = function (req, res, next){
-  Category.getAllCategory(function(err, docs){
-    if (err) 
-    { return next(err); }
-    else
-    {
-      res.render('pages/category/category', {listCategory: docs});
-    }
-  });
+exports.category = async function (req, res, next){
+  const user = await req.user;
+  if(!user){
+    res.redirect('/');
+  }else{
+      Category.getAllCategory(function(err, docs){
+      if (err) 
+      { return next(err); }
+      else
+      {
+        res.render('pages/category/category', {listCategory: docs});
+      }
+    });
+  }
 }
 
   exports.addCategory = async function(req, res, next){
