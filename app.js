@@ -4,7 +4,45 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
 var indexRouter = require('./routes/index');
+
+const User = require('./models/customer');
+
+passport.use(new localStrategy({usernameField: 'email'},
+    async function(username, password, done){
+      try{
+        const user  = await User.getUserByEmail(username);
+        console.log("User login: ", user);
+        if(!user){
+            return done(null, false, {message: 'Incorrect email.'});
+            console.log('Incorrect email.');
+
+        }else{
+          const isPasswordValid = await User.validPassword(username, password);
+          if(!isPasswordValid){
+            return done(null, false, {message:'Incorrect password' });
+            console.log('Incorrect password', isPasswordValid);
+          }
+          return done(null, user);
+        }
+      }catch(ex){
+       return done(ex);
+     }
+    }
+));
+
+passport.serializeUser(function(user, done){
+  done(null, user.email);
+});
+
+passport.deserializeUser(function(email, done){
+  const user = User.getUserByEmail(email);
+  done(undefined, user);
+});
+
 
 var app = express();
 
@@ -20,6 +58,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret:"meo cats"}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 

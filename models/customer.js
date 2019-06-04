@@ -19,6 +19,8 @@ exports.verifyAccount = function(email, password, cb){
         })
 }
 
+
+
 exports.allCustomerByType=function (mtype,cb) {
     var collection = db.get().collection('Customer');
 
@@ -61,3 +63,19 @@ exports.deleteCustomer = function (id, callBack)
         callBack(err, result);
     });
 }
+
+
+const getUserByEmail= async(email, callBack) => { 
+    var collection = await db.get().collection('Customer');
+    const User = await collection.findOne({email});
+    console.log("User get", User);
+    return User;
+};
+exports.getUserByEmail = getUserByEmail;
+
+exports.validPassword = async function(email, password, cb){
+    const user = await getUserByEmail(email);
+    if(!user)
+        return false;
+    return await bcrypt.compare(password, user.pass);
+};

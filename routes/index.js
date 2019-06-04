@@ -10,10 +10,17 @@ var product_controller = require('../controllers/productController')
 var category_controller = require('../controllers/categoryController')
 var store_controller = require('../controllers/storeController')
 
+const passport = require('passport');
+
 const upload = require('../uploadMiddleware');
 /* GET home page. */
 router.get('/', user_controller.login);
-router.post('/',user_controller.verifyAccount);
+//router.post('/',user_controller.verifyAccount);
+
+router.post('/', passport.authenticate('local',{
+    successRedirect:'/home',
+    failureRedirect:'/'
+}));
 
 router.get('/home', home_controller.index);
 router.get('/user',user_controller.user );
