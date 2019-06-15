@@ -46,7 +46,7 @@ exports.editCustomer = function (id, name, address, phone, updatedTime, callBack
 }
 exports.editRole = function(id,role,callBack){
     var collection = db.get().collection('Customer');
-
+    
     collection.updateOne({_id : ObjectId(id)}, {
         $set: {
             role: role

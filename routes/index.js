@@ -32,8 +32,11 @@ router.post('/user/edit', user_controller.edit);
 router.post('/user/autho',user_controller.userAutho);
 
 router.get('/user/delete/:id', user_controller.delete);
+
 router.get('/order', order_controller.order );
-router.get('/order/update', order_controller.updateStatus);
+router.get('/order/:id',order_controller.listItemsInOrder);
+
+router.post('/order/update-status-order', order_controller.updateStatus);
 
 router.get('/product',product_controller.product_list);
 router.get('/product/delete/:id',product_controller.delete);
