@@ -27,6 +27,11 @@ router.get('/logout',user_controller.logout);
 
 /* GET home page. */
 router.get('/home', home_controller.index);
+
+router.get('/home/productSold/:update', home_controller.listProductSold);
+router.get('/home/orderSuccess/:update', home_controller.listOrderSuccess);
+router.get('/home/userRegister/:update', home_controller.listUserRegister);
+
 router.get('/user',user_controller.user );
 router.post('/user/edit', user_controller.edit);
 router.post('/user/autho',user_controller.userAutho);

@@ -77,3 +77,30 @@ exports.validPassword = async function(email, password, cb){
         return false;
     return await bcrypt.compare(password, user.pass);
 };
+
+
+exports.getListUserRegister=function(passDate, cb){
+
+    var passDateNumber = parseFloat(passDate);
+    console.log(passDateNumber);
+    
+    var date = new Date();
+    date.setHours(0,0,0,0);
+    var currentDateNumber = date.getTime();
+    console.log("current", currentDateNumber);
+    
+    //get data from yesterday: only yesterday
+    if(passDateNumber == date.setDate(date.getDate() - 1)){
+        currentDateNumber=passDateNumber;
+    }
+    
+    var collection = db.get().collection('Customer');
+    collection.find({
+        update:{
+            $gte:  passDateNumber,
+            $lt:   currentDateNumber+1
+        }
+    }).toArray(function(err, result){
+        cb(err, result);
+    })
+}

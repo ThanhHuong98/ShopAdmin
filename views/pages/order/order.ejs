@@ -108,7 +108,6 @@ function formatDate(date) {
 
                                             <td class="center">
                                                     <button class="btn btn-outline-primary btn-edit-order" type="button" data-toggle="modal" data-target="#myModal" 
-
                                                             data-id="<%=order._id%>"
                                                             data-total-price="<%=order.products.totalPrice%>"
                                                             data-items="<%=order.products.items%>"
@@ -260,9 +259,9 @@ function formatDate(date) {
 
         $(".btn-edit-order").click(function () {
 
-            $("#list-product").empty();
-            var code = $(this).parent().parent().find('#order-code').text();
+            $("#list-product").empty(); 
             var url = "/order/" + code;
+            var code = $(this).parent().parent().find('#order-code').text();
             console.log(url);
             $.get(url)
             .then(data => {
@@ -319,13 +318,12 @@ function formatDate(date) {
         $("#btn-submit").click(function () {
             var id = $('#txt-order-code').attr('placeholder');
             var element = document.getElementById("mySelect");
-            
+
             var selectedValue = element.options[element.selectedIndex].value;
-            if(selectedValue == -1){
-                selectedValue = statusCurrent;
-            }
-            var url = '/order/update-status-order?id='+id + '&'+'status='+selectedValue;
-            $("#myForm").attr('action',url);
+            console.log(selectedValue)
+                var url = '/order/update-status-order?id='+id + '&'+'status='+selectedValue;
+                console.log(url)
+                 $("#myForm").attr('action',url);
         })
     </script>
 </body>
