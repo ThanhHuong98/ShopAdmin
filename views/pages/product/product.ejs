@@ -54,6 +54,7 @@
                                 <table class="table table-bordered" id="dataTables-example">
                                     <thead>
                                         <tr>
+                                                <th class="style-middle-center">STT</th>
                                             <th class="style-middle-center">Tên sản phẩm</th>
                                             <th class="style-middle-center">Hình ảnh</th>
                                             <th class="style-middle-center">Mô tả</th>
@@ -64,8 +65,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% listProduct.forEach(function(product){ %>
+                                        <% listProduct.forEach(function(product, i){ %>
                                         <tr>
+                                                <td class="style-middle-center"><%=i%></td>
                                             <td class="style-middle-center" id="product-name"><%=product.name%></td>
                                             <td class="style-middle-center">
                                                 <img src="<%=product.image%>" class="img-product" id="product-image">

@@ -11,18 +11,18 @@ exports.allOders = function (cb) {
     })
 }
 
-exports.allOdersByStatus=function (mstatus,cb) {
-    var collection = db.get().collection('Order');
-    collection.find({status: mstatus}).toArray(function(err, result){
-        cb(err, result)
-    })
-}
+// exports.allOdersByStatus=function (mstatus,cb) {
+//     var collection = db.get().collection('Order');
+//     collection.find({status: mstatus}).toArray(function(err, result){
+//         cb(err, result)
+//     })
+// }
 
 exports.updateStatus = function(id, status, callBack)
 {
     var collection = db.get().collection('Order');
     if(status!=undefined){
-        collection.updateOne({_id: ObjectId(id)}, {
+        collection.updateOne({orderID: id}, {
             $set:{
                 status : status,
             }
@@ -35,8 +35,7 @@ exports.updateStatus = function(id, status, callBack)
  exports.getListItem=function(id, cb){
 
     var collection = db.get().collection('Order');
-
-    collection.findOne({ _id: ObjectId(id) }, function (err, result) {
+    collection.findOne({ orderID: id }, function (err, result) {
         cb(err, result)
     })
 

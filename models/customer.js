@@ -15,7 +15,7 @@ exports.verifyAccount = function(email, password, cb){
     var collection = db.get().collection('Customer');
     collection.find({email: email}).toArray(function(err, user){
             cb(err, user);
-            console.log("USER", user);
+            //console.log("USER", user);
         })
 }
 
@@ -27,7 +27,6 @@ exports.allCustomerByType=function (mtype,cb) {
     collection.find({type: mtype}).toArray(function(err, result){
         cb(err, result)
     })
-
 }
 
 exports.editCustomer = function (id, name, address, phone, updatedTime, callBack)

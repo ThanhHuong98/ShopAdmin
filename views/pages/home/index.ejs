@@ -25,9 +25,6 @@
     setTimeout("preventBack()", 0);
     window.onunload=function(){null};
   
-    // window.onbeforeunload=function(){
-    //   return "you don't able combe back"
-    // }
   </script>
   
 </head>
@@ -45,44 +42,40 @@
           <h4 class="text-line">Thời gian: </h4>
         </div>
         <div class="col-md-10">
-          <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-outline-primary active"> Hôm nay </button>
-          <button type="button" class="btn btn-outline-primary">Hôm qua</button>
-          <button type="button" class="btn btn-outline-primary">3 ngày trước</button>
-          <button type="button" class="btn btn-outline-primary">1 tuần trước</button>
-          <button type="button" class="btn btn-outline-primary">2 tuần trước</button>
-          <button type="button" class="btn btn-outline-primary">1 tháng trước</button>
-          <button type="button" class="btn btn-outline-primary">1 năm trước</button>
+          <div id="selector" class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary active"> Hôm nay </button>
+            <button type="button" class="btn btn-outline-primary">Hôm qua</button>
+            <button type="button" class="btn btn-outline-primary">3 ngày trước</button>
+            <button type="button" class="btn btn-outline-primary">1 tuần trước</button>
+            <button type="button" class="btn btn-outline-primary">2 tuần trước</button>
+            <button type="button" class="btn btn-outline-primary">1 tháng trước</button>
+            <button type="button" class="btn btn-outline-primary">1 năm trước</button>
           </div>
         </div>
       </div>
       <br/>
       <div class="row">
         <div class="col-md-2">
-          <h4 class="text-line">Cửa hàng: </h4>
+          <h4 class="text-line">Danh mục: </h4>
         </div>
         <div class="col-md-7">
           <div id="editprodct" style="display: none;">
             <select class="form-control">&lt;!&ndash;&ndash;&gt;
               <option value="5c5004393179475d41f79e5a">Tất cả</option>
-              <option value="5c50047a3179475d41f79e62">231 Nguyễn Văn Cừ, phường 4, quận 5, TP.HCM</option>
-              <option value="5c5004753179475d41f79e61">135 Trần Hưng Đạo, phường 4, quận 1, TP.HCM</option>
-              <option value="5c50046a3179475d41f79e60">Vincom Thảo Điền, 161 XLHN, quận 2, TP.HCM</option>
-              <option value="5c5004643179475d41f79e5f">112 Lương Nhữ Hộc, Hải Châu, TP.Đà Nẵng</option>
-              <option value="5c50045b3179475d41f79e5e">567 Âu Cơ, phường 2, TP.Hà Nội</option>
-              <option value="5c5004553179475d41f79e5d">32E/120 Trường Chinh, phường Thanh Xuân, quận Hoàn Kiếm, Hà Nội</option>
+              <option value="5c50047a3179475d41f79e62">Mùa xuân</option>
+              <option value="5c5004753179475d41f79e61">Mùa hạ</option>
+              <option value="5c50046a3179475d41f79e60">Mùa thu</option>
+              <option value="5c5004643179475d41f79e5f">Mùa đông</option>
             </select>
           </div>
           <div id="newproduct">
-            <select class="form-control">&lt;!&ndash;&ndash;&gt;
-              <option value="5c5004393179475d41f79e5a">Tất cả</option>
-              <option value="5c50047a3179475d41f79e62">231 Nguyễn Văn Cừ, phường 4, quận 5, TP.HCM</option>
-              <option value="5c5004753179475d41f79e61">135 Trần Hưng Đạo, phường 4, quận 1, TP.HCM</option>
-              <option value="5c50046a3179475d41f79e60">Vincom Thảo Điền, 161 XLHN, quận 2, TP.HCM</option>
-              <option value="5c5004643179475d41f79e5f">112 Lương Nhữ Hộc, Hải Châu, TP.Đà Nẵng</option>
-              <option value="5c50045b3179475d41f79e5e">567 Âu Cơ, phường 2, TP.Hà Nội</option>
-              <option value="5c5004553179475d41f79e5d">32E/120 Trường Chinh, phường Thanh Xuân, quận Hoàn Kiếm, Hà Nội</option>
-            </select>
+              <select class="form-control">&lt;!&ndash;&ndash;&gt;
+                  <option value="5c5004393179475d41f79e5a">Tất cả</option>
+                  <option value="5c50047a3179475d41f79e62">Mùa xuân</option>
+                  <option value="5c5004753179475d41f79e61">Mùa hạ</option>
+                  <option value="5c50046a3179475d41f79e60">Mùa thu</option>
+                  <option value="5c5004643179475d41f79e5f">Mùa đông</option>
+                </select>
           </div>
         </div>
       </div>
@@ -286,6 +279,12 @@
 <script src="javascripts/bootstrap.js"></script>
 <!-- CUSTOM SCRIPTS  -->
 <script src="javascripts/custom.js"></script>
+<script>
+  $('#selector button').click(function() {
+    $(this).addClass('active').siblings().removeClass('active');
 
+    // TODO: insert whatever you want to do with $(this) here
+});
+</script>
 </body>
 </html>
