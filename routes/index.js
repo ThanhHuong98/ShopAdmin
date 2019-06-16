@@ -40,6 +40,7 @@ router.get('/user/delete/:id', user_controller.delete);
 
 router.get('/order', order_controller.order );
 router.get('/order/:id',order_controller.listItemsInOrder);
+router.get('/order/status/:status',order_controller.filterOrder);
 
 router.post('/order/update-status-order', order_controller.updateStatus);
 

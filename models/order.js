@@ -10,13 +10,6 @@ exports.allOders = function (cb) {
 
     })
 }
-// exports.allOdersByStatus=function (mstatus,cb) {
-//     var collection = db.get().collection('Order');
-//     collection.find({status: mstatus}).toArray(function(err, result){
-//         cb(err, result)
-//     })
-// }
-
 exports.updateStatus = function(id, status, callBack)
 {
     var collection = db.get().collection('Order');
@@ -38,6 +31,20 @@ exports.updateStatus = function(id, status, callBack)
     })
  }
 
+ exports.getListItembyStatus=function(status, cb){
+    var collection = db.get().collection('Order');
+    var numberStatus = parseInt(status);
+    if(numberStatus == -1){
+        collection.find().toArray(function (err, docs) {
+            cb(err, docs)
+        })
+    }else{
+        collection.find({status}).toArray(function (err, docs) {
+            cb(err, docs)
+        })
+    }
+ }
+
  //Get list order ensure: update choose and status == 4
  exports.getlistOrderSuccessbyUpdate=function(passDate, cb){
 
@@ -53,17 +60,6 @@ exports.updateStatus = function(id, status, callBack)
     if(passDateNumber == date.setDate(date.getDate() - 1)){
         currentDateNumber = passDateNumber;
     }
-    
-    // var collection = db.get().collection('Order');
-    // collection.find({
-    //     update:{
-    //         $gte:  passDateNumber,
-    //         $lt:   currentDateNumber+1
-    //     },
-    //     status: "4"
-    // }).toArray(function(err, result){
-    //     cb(err, result);
-    // })
     var collection = db.get().collection('Order');
     collection.find({
         update:{
