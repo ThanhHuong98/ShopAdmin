@@ -314,6 +314,20 @@ function formatDate(time) {
 
                             }
                             td6.innerHTML = str;
+
+                            var td7 = document.createElement("td")
+                            td7.setAttribute('class', 'center');
+                            var btn = document.createElement("BUTTON");
+                            btn.setAttribute('class','btn')
+                            btn.setAttribute('class','btn-outline-primary')
+                            btn.setAttribute('class','btn-edit-order')
+                            btn.type = "button";
+                            btn.setAttribute("data-toggle", "modal");
+                            $('[data-toggle="modal"]').tooltip()
+                           // btn.onclick = (function(entry) {return function() {chooseUser(entry);}})(entry);
+                            td7.appendChild(btn);
+                           
+
                             tr.append(td0);
                             tr.append(td1);
                             tr.append(td2);
@@ -321,6 +335,7 @@ function formatDate(time) {
                             tr.append(td4);
                             tr.append(td5);
                             tr.append(td6);
+                            tr.append(td7);
                             $("#list-oders").append(tr);
 
                         })
