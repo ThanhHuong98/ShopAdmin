@@ -346,8 +346,10 @@ function formatDate(time) {
         $(".btn-edit-order").click(function () {
 
             $("#list-product").empty();
-            var url = "/order/" + code;
+
+            
             var code = $(this).parent().parent().find('#order-code').text();
+            var url = "/order/" + code;
             console.log(url);
             $.get(url)
                 .then(data => {
@@ -373,7 +375,8 @@ function formatDate(time) {
                         var td2 = document.createElement("td")
                         td2.innerHTML = index.qty;
                         var td3 = document.createElement("td")
-                        td3.innerHTML = index.item.price;
+                        var price = index.item.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                        td3.innerHTML = price;
                         tr.append(td0);
                         tr.append(td1);
                         tr.append(td2);
@@ -396,7 +399,9 @@ function formatDate(time) {
             $('#txt-order-address').attr('placeholder', address);
             $('#txt-order-update').attr('placeholder', update);
             $('#txt-order-status').attr('placeholder', status);
-            $('#txt-order-totalprice').attr('placeholder', totalPrice);
+
+            console.log(parseInt(totalPrice,10).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}))
+            $('#txt-order-totalprice').attr('placeholder', parseInt(totalPrice,10).toLocaleString('it-IT', {style : 'currency', currency : 'VND'}));
 
         })
 

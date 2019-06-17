@@ -9,6 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <![endif]-->
   <title>FLORAL ADMIN</title>
+  <!-- CHART -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   <!-- BOOTSTRAP CORE STYLE  -->
   <link href="stylesheets/bootstrap.css" rel="stylesheet" />
   <!-- FONT AWESOME STYLE  -->
@@ -17,6 +19,7 @@
   <link href="stylesheets/style.css" rel="stylesheet" />
   <!-- GOOGLE FONT -->
   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
 
   <script type="text/javascript">
     function preventBack(){
@@ -116,13 +119,81 @@
       </div>
 
     </div>
-
+      <!-- CHART -->
+      <h4 class="header-line">BIỂU ĐỒ THỐNG KÊ SỐ LƯỢNG SẢN PHẨM ĐÃ BÁN THEO DANH MỤC</h4>
+      <div class="row"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+        <canvas id="myChart" width="2280" height="1140" style="display: block; height: 570px; width: 1140px;"></canvas>
+      </div>
   </div>
 </div>
 <% include ../../partials/footer.ejs %>
 <!-- FOOTER SECTION END-->
 <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+<script>
+    // var url = "/order/" + "0I7KM0N";
+    // jQuery.get(url)
+    //             .then(data => {
+    //                 console.log('DTATATATA:::', data);
+    //               })
+
+    let myChart = document.getElementById('myChart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Open+Sans';
+    Chart.defaults.global.defaultFontSize = 25;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:['Mùa xuân', 'Mùa hạ', 'Mùa thu', 'Mùa đông'],
+         datasets:[{
+          label:'',
+          data:[1,2,3,4],
+          //backgroundColor:'green',
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:true,
+          //text:'Biểu đồ thống kê số lượng sản phẩm bán ra theo danh mục',
+          fontSize:50
+        },
+        legend:{
+          display:false,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:0
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+  </script>
 <!-- CORE JQUERY  -->
+
 <script src="javascripts/jquery-1.10.2.js"></script>
 <script>
     (function (global) {

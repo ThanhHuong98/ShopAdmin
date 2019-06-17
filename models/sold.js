@@ -69,3 +69,10 @@ exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
     });
 }
 
+exports.getAllSold=function(cb){
+    var collection = db.get().collection('Sold');
+    collection.find({}).toArray(function(err, result){
+        cb(err, result);
+    })
+}
+
