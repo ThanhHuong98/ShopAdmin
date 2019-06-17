@@ -6,12 +6,7 @@ var Customer = require('../models/customer');
 exports.index = async function(req, res, next) {
     const user = await req.user;
     if(user){
-      var data=[];
-      data.push(1);
-      data.push(2);
-      data.push(3);
-      data.push(4);
-          res.render('pages/home/index', { title: 'Home', datatest:data});
+          res.render('pages/home/index', { title: 'Home'});
         }
     else
       res.redirect('/');
@@ -19,6 +14,7 @@ exports.index = async function(req, res, next) {
 exports.users = function(req, res, next) {
   res.send('respond with a resource');
 }
+
 
 exports.listOrderSuccess = function(req, res, next){
     const passDate = req.params.update;
@@ -31,7 +27,6 @@ exports.listOrderSuccess = function(req, res, next){
         res.json(result);
     })
 }
-
 exports.listProductSold= function(req, res, next){
 
     const passDate = req.params.update;
@@ -56,4 +51,19 @@ exports.listUserRegister=function(req, res, next){
          //res.end("OK")
          res.json(result);
      })
+}
+
+exports.getDataSetChart= async function(req,res, next){
+
+  await Sold.getDataChart(function(err, result){
+    if(err) {res.err(err);}
+    console.log("Data test CHART", result);
+    res.json(result);
+  })
+    // var data = [];
+    // for(var i =14; i < 19 ;i ++){
+    //   data.push(i);
+    // }
+    //   console.log("Data test CHART", data);
+    //  res.json(data);
 }

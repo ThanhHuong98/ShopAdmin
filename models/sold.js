@@ -69,10 +69,35 @@ exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
     });
 }
 
-exports.getAllSold=function(cb){
-    var collection = db.get().collection('Sold');
-    collection.find({}).toArray(function(err, result){
-        cb(err, result);
-    })
-}
 
+const countSoldByCategory = async(code, cb)=>{
+    var collectionSold = db.get().collection('Sold');
+    const numberCount = await collectionSold.find({category: code}).count();
+    return numberCount;
+}
+exports.countSoldByCategory = countSoldByCategory;
+
+const getAllCategory = async(cb)=>{
+    var collectionCategory = db.get().collection('Category');
+    const listCategores = await collectionCategory.find({}).toArray();
+    return listCategores;
+}
+exports.getAllCategory = getAllCategory;
+
+
+exports.getDataChart = async function(cb){
+    const data = [];
+    // const listCategores = await getAllCategory();
+    // console.log(listCategores)
+    //listCategores.forEach(function(e){
+        const numberMX = await countSoldByCategory("MX");data.push(numberMX);
+        const numberMH = await countSoldByCategory("MH");data.push(numberMH);
+        const numberMT = await countSoldByCategory("MT");data.push(numberMT);
+        const numberMĐ = await countSoldByCategory("MĐ");data.push(numberMĐ);
+        console.log(data)
+        //set number of min and max product sold
+        data.push(0);
+        cb(null, data)
+   //})
+    //console.log(data)
+}

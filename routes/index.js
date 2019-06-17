@@ -27,6 +27,7 @@ router.get('/logout',user_controller.logout);
 
 /* GET home page. */
 router.get('/home', home_controller.index);
+router.get('/home/chart/', home_controller.getDataSetChart);
 
 router.get('/home/productSold/:update', home_controller.listProductSold);
 router.get('/home/orderSuccess/:update', home_controller.listOrderSuccess);
