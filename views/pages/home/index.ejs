@@ -25,9 +25,6 @@
     setTimeout("preventBack()", 0);
     window.onunload=function(){null};
   
-    // window.onbeforeunload=function(){
-    //   return "you don't able combe back"
-    // }
   </script>
   
 </head>
@@ -37,101 +34,60 @@
 <div class="content-wrapper">
   <div class="container">
     <div class="row pad-botm col-md-12">
-      <div class="row col-md-12">
-        <h4 class="header-line">THỐNG KÊ</h4>
-      </div>
       <div class="row">
         <div class="col-md-2">
           <h4 class="text-line">Thời gian: </h4>
         </div>
         <div class="col-md-10">
-          <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-outline-primary active"> Hôm nay </button>
-          <button type="button" class="btn btn-outline-primary">Hôm qua</button>
-          <button type="button" class="btn btn-outline-primary">3 ngày trước</button>
-          <button type="button" class="btn btn-outline-primary">1 tuần trước</button>
-          <button type="button" class="btn btn-outline-primary">2 tuần trước</button>
-          <button type="button" class="btn btn-outline-primary">1 tháng trước</button>
-          <button type="button" class="btn btn-outline-primary">1 năm trước</button>
+          <div id="selector" class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary active" value="0">Hôm nay </button>
+            <button type="button" class="btn btn-outline-primary" value="1">Hôm qua</button>
+            <button type="button" class="btn btn-outline-primary" value="3">3 ngày trước</button>
+            <button type="button" class="btn btn-outline-primary"value="7">1 tuần trước</button>
+            <button type="button" class="btn btn-outline-primary" value="14">2 tuần trước</button>
+            <button type="button" class="btn btn-outline-primary" value="31">1 tháng trước</button>
+            <button type="button" class="btn btn-outline-primary" value="365">1 năm trước</button>
           </div>
         </div>
       </div>
       <br/>
-      <div class="row">
-        <div class="col-md-2">
-          <h4 class="text-line">Cửa hàng: </h4>
-        </div>
-        <div class="col-md-7">
-          <div id="editprodct" style="display: none;">
-            <select class="form-control">&lt;!&ndash;&ndash;&gt;
-              <option value="5c5004393179475d41f79e5a">Tất cả</option>
-              <option value="5c50047a3179475d41f79e62">231 Nguyễn Văn Cừ, phường 4, quận 5, TP.HCM</option>
-              <option value="5c5004753179475d41f79e61">135 Trần Hưng Đạo, phường 4, quận 1, TP.HCM</option>
-              <option value="5c50046a3179475d41f79e60">Vincom Thảo Điền, 161 XLHN, quận 2, TP.HCM</option>
-              <option value="5c5004643179475d41f79e5f">112 Lương Nhữ Hộc, Hải Châu, TP.Đà Nẵng</option>
-              <option value="5c50045b3179475d41f79e5e">567 Âu Cơ, phường 2, TP.Hà Nội</option>
-              <option value="5c5004553179475d41f79e5d">32E/120 Trường Chinh, phường Thanh Xuân, quận Hoàn Kiếm, Hà Nội</option>
-            </select>
-          </div>
-          <div id="newproduct">
-            <select class="form-control">&lt;!&ndash;&ndash;&gt;
-              <option value="5c5004393179475d41f79e5a">Tất cả</option>
-              <option value="5c50047a3179475d41f79e62">231 Nguyễn Văn Cừ, phường 4, quận 5, TP.HCM</option>
-              <option value="5c5004753179475d41f79e61">135 Trần Hưng Đạo, phường 4, quận 1, TP.HCM</option>
-              <option value="5c50046a3179475d41f79e60">Vincom Thảo Điền, 161 XLHN, quận 2, TP.HCM</option>
-              <option value="5c5004643179475d41f79e5f">112 Lương Nhữ Hộc, Hải Châu, TP.Đà Nẵng</option>
-              <option value="5c50045b3179475d41f79e5e">567 Âu Cơ, phường 2, TP.Hà Nội</option>
-              <option value="5c5004553179475d41f79e5d">32E/120 Trường Chinh, phường Thanh Xuân, quận Hoàn Kiếm, Hà Nội</option>
-            </select>
-          </div>
-        </div>
-      </div>
     </div>
-
+    <h4 class="header-line">THỐNG KÊ TỔNG THU - SL ĐƠN HÀNG - SL NGƯỜI DÙNG</h4>
     <div class="row">
-
       <div class="col-md-4 col-sm-4 col-xs-6">
         <div class="alert alert-info back-widget-set text-center">
           <img src="images/revenue.png" class="img-statistic"/>
           <h3>Tổng thu</h3>
-          <h4>12.000.000đ</h4>
+          <h4 id="info-totalprice-order"></h4>
         </div>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-6">
         <div class="alert alert-warning back-widget-set text-center">
           <img src="images/order.png"  class="img-statistic"/>
           <h3>Đơn hàng</h3>
-          <h4>30</h4>
+          <h4 id="info-count-order"></h4>
         </div>
       </div>
       <div class="col-md-4 col-sm-4 col-xs-6">
         <div class="alert alert-success back-widget-set text-center">
           <img src="images/customer.png" class="img-statistic"/>
           <h3>Người dùng</h3>
-          <h4>500</h4>
+          <h4 id="info-count-user"></h4>
         </div>
       </div>
     </div>
 
-
+    <h4 class="header-line">THỐNG KÊ SẢN PHẨM ĐÃ BÁN</h4>
     <div class="row">
       <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="panel">
           <div class="panel-heading header-panel" >
             Hình ảnh 10 sản phẩm bán chạy nhất
           </div>
-          <div class="panel-body text-center top-10-img">
-            <img class="img-thumbnail" src="images/rose.jpg" />
-            <img class="img-thumbnail" src="images/coDuoiTho.jpg" />
-            <img class="img-thumbnail" src="images/camChuong.png" />
-            <img class="img-thumbnail" src="images/cucVang.jpg" />
-            <img class="img-thumbnail" src="images/huongDuong.jpg" />
-            <img class="img-thumbnail" src="images/cucTrang.jpg" />
-            <img class="img-thumbnail" src="images/lavender.jpg" />
-            <img class="img-thumbnail" src="images/anhDao.jpg"/>
-            <img class="img-thumbnail" src="images/lan.jpg" />
-            <img class="img-thumbnail" src="images/coTaiTho.jpg" />
+          <div class="panel-body text-center top-10-img" id="image-sold-product">
+            
           </div>
+
         </div>
       </div>
       <div class="col-md-8 col-sm-8 col-xs-12">
@@ -146,82 +102,12 @@
                 <tr>
                   <th>STT</th>
                   <th>Tên sản phẩm</th>
-                  <th>Mã sản phẩm</th>
                   <th>Giá bán (1 đơn vị)</th>
                   <th>Số lượng bán ra</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Hoa hồng</td>
-                  <td>HH370</td>
-                  <td>20.000</td>
-                  <td>356</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Cỏ đuôi thỏ</td>
-                  <td>DTH542</td>
-                  <td>20.000</td>
-                  <td>350</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Cẩm chướng</td>
-                  <td>CC530</td>
-                  <td>17.000</td>
-                  <td>349</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Hoa cúc vàng</td>
-                  <td>C670</td>
-                  <td>10.000</td>
-                  <td>340</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Hướng dương</td>
-                  <td>HD124</td>
-                  <td>15.000</td>
-                  <td>337</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>Hoa cúc trắng</td>
-                  <td>CHM680</td>
-                  <td>13.000</td>
-                  <td>335</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>Oải hương</td>
-                  <td>OH789</td>
-                  <td>35.000</td>
-                  <td>330</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>Hoa anh đào</td>
-                  <td>AD873</td>
-                  <td>80.000</td>
-                  <td>327</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>Lan hồ điệp</td>
-                  <td>L287</td>
-                  <td>156.000</td>
-                  <td>325</td>
-                </tr>
-                <tr>
-                  <td>10</td>
-                  <td>Cỏ tai thỏ</td>
-                  <td>TTH078</td>
-                  <td>90.000</td>
-                  <td>200</td>
-                </tr>
+                <tbody id="list-sold-product">
+
                 </tbody>
               </table>
             </div>
@@ -286,6 +172,126 @@
 <script src="javascripts/bootstrap.js"></script>
 <!-- CUSTOM SCRIPTS  -->
 <script src="javascripts/custom.js"></script>
+<script>
+  $('#selector button').click(function() {
+    $(this).addClass('active').siblings().removeClass('active');
+    // TODO: insert whatever you want to do with $(this) here
+    var val = this.value;
+    var valNumber = parseInt(val, 10);
+    switch(valNumber){
+        case 0:
+        var date = new Date();
+          date.setHours(0,0,0,0);
+          var update = date.getTime();
+          setUI(update)
+        break;
+        case 1:
+          var date = new Date();
+          date.setHours(0,0,0,0);
+          var update = date.setDate(date.getDate() - 1);
+          setUI(update)
+        break;
+        case 3:
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            var update = date.setDate(date.getDate() - 3);
+            setUI(update)
+        break;
+        case 7:
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            var update = date.setDate(date.getDate() - 7);
+            setUI(update)
+        break;
+        case 14:
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            var update = date.setDate(date.getDate() - 14);
+            setUI(update)
+        break;
+        case 31:
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            var update = date.setDate(date.getDate() - 31);
+            setUI(update)
+        break;
+        case 365:
+            var date = new Date();
+            date.setHours(0,0,0,0);
+            var update = date.setDate(date.getDate() - 365);
+            setUI(update)
+        break;
 
+    }
+
+});
+
+var setUI = function(update){
+  //refesh
+  $("#list-sold-product").empty();
+  $("#image-sold-product").empty();
+  //set info list-sold-product
+  var url = "/home/productSold/" + update;
+          console.log(url);
+          $.get(url)
+            .then(data => {
+              console.log(data);
+              for(var i = 0;i < data.length; i++)
+              {
+                  if(i===10) break;
+                  var e = data[i];
+                  var tr = document.createElement("tr");
+                  var td0 = document.createElement("td");
+                  td0.innerHTML = i;
+                  var td1 = document.createElement("td");
+                  td1.innerHTML = e.name;
+                  var td2 = document.createElement("td");
+                  var price = e.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                  td2.innerHTML = price;
+                  var td3 = document.createElement("td");
+                  td3.innerHTML = e.qty;
+                  tr.append(td0);
+                      tr.append(td1);
+                      tr.append(td2);
+                      tr.append(td3);
+                      $("#list-sold-product").append(tr);
+                  
+                      var x = document.createElement("IMG");
+                      var src = e.image;
+                      x.setAttribute("src", src);
+                      x.setAttribute("alt", "");
+                      $("#image-sold-product").append(x);
+              } 
+     })
+
+     //Set info order
+     var url1 = "/home/orderSuccess/" + update;
+          console.log(url1);
+          $.get(url1)
+            .then(data => {
+              var totalPrice = 0;
+              data.forEach(function(e){
+                totalPrice =totalPrice+ e.products.totalPrice;
+              })
+              var countOrders = data.length;
+              totalPrice = totalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+              $('#info-count-order').text(countOrders);
+              $('#info-totalprice-order').text(totalPrice)
+         })
+
+     //Set info number of user resgister
+     var url2 = "/home/userRegister/" + update;
+          console.log(url2);
+          $.get(url2)
+            .then(data => {
+              var totalPrice = 0;
+
+              var countUsers = data.length;
+              console.log("contUsers", countUsers);
+              $('#info-count-user').text(countUsers);
+         })
+
+};
+</script>
 </body>
 </html>

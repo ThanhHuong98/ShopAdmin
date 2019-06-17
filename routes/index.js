@@ -27,13 +27,22 @@ router.get('/logout',user_controller.logout);
 
 /* GET home page. */
 router.get('/home', home_controller.index);
+
+router.get('/home/productSold/:update', home_controller.listProductSold);
+router.get('/home/orderSuccess/:update', home_controller.listOrderSuccess);
+router.get('/home/userRegister/:update', home_controller.listUserRegister);
+
 router.get('/user',user_controller.user );
 router.post('/user/edit', user_controller.edit);
 router.post('/user/autho',user_controller.userAutho);
 
 router.get('/user/delete/:id', user_controller.delete);
+
 router.get('/order', order_controller.order );
-router.get('/order/update', order_controller.updateStatus);
+router.get('/order/:id',order_controller.listItemsInOrder);
+router.get('/order/status/:status',order_controller.filterOrder);
+
+router.post('/order/update-status-order', order_controller.updateStatus);
 
 router.get('/product',product_controller.product_list);
 router.get('/product/delete/:id',product_controller.delete);

@@ -15,7 +15,7 @@ exports.verifyAccount = function(email, password, cb){
     var collection = db.get().collection('Customer');
     collection.find({email: email}).toArray(function(err, user){
             cb(err, user);
-            console.log("USER", user);
+            //console.log("USER", user);
         })
 }
 
@@ -27,7 +27,6 @@ exports.allCustomerByType=function (mtype,cb) {
     collection.find({type: mtype}).toArray(function(err, result){
         cb(err, result)
     })
-
 }
 
 exports.editCustomer = function (id, name, address, phone, updatedTime, callBack)
@@ -46,7 +45,7 @@ exports.editCustomer = function (id, name, address, phone, updatedTime, callBack
 }
 exports.editRole = function(id,role,callBack){
     var collection = db.get().collection('Customer');
-
+    
     collection.updateOne({_id : ObjectId(id)}, {
         $set: {
             role: role
@@ -78,3 +77,30 @@ exports.validPassword = async function(email, password, cb){
         return false;
     return await bcrypt.compare(password, user.pass);
 };
+
+
+exports.getListUserRegister=function(passDate, cb){
+
+    var passDateNumber = parseFloat(passDate);
+    console.log(passDateNumber);
+    
+    var date = new Date();
+    date.setHours(0,0,0,0);
+    var currentDateNumber = date.getTime();
+    console.log("current", currentDateNumber);
+    
+    //get data from yesterday: only yesterday
+    if(passDateNumber == date.setDate(date.getDate() - 1)){
+        currentDateNumber=passDateNumber;
+    }
+    
+    var collection = db.get().collection('Customer');
+    collection.find({
+        update:{
+            $gte:  passDateNumber,
+            $lt:   currentDateNumber+1
+        }
+    }).toArray(function(err, result){
+        cb(err, result);
+    })
+}

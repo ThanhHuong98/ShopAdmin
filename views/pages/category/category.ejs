@@ -54,6 +54,7 @@
                                 <table class="table table-bordered" id="dataTables-example">
                                     <thead>
                                         <tr>
+                                                <th class="style-middle-center">STT</th>
                                             <th class="style-middle-center">Mã danh mục</th>
                                             <th class="style-middle-center">Hình ảnh</th>
                                             <th class="style-middle-center">Tên danh mục</th>
@@ -61,8 +62,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <%listCategory.forEach(function(category){ %>
+                                        <%listCategory.forEach(function(category, i){ %>
                                         <tr>
+                                                <td class="style-middle-center"><%=i%></td>
                                             <td class="style-middle-center category-code" id="category-code"><%=category.code%></td>
                                             <td class="style-middle-center category-img">
                                                 <img src="<%=category.image%>" class="img-category" id="category-image">
