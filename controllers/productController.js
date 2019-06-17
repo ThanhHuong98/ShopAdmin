@@ -1,89 +1,112 @@
 var Product = require('../models/product');
 var Category = require('../models/category');
 var async = require('async');
-const Resize = require('../resize');
 var path = require('path');
 
 exports.product = function (req, res, next) {
   res.render('pages/product/product');
 }
 
-exports.product_list = async function(req,res,next){
+exports.product_list = async function (req, res, next) {
   const user = await req.user;
-  if(user){
+  if (user) {
     async.parallel({
-      listCategory: function(cb){
+      listCategory: function (cb) {
         Category.getAllCategory(cb);
       },
-      listProduct: function(cb){
+      listProduct: function (cb) {
         Product.all(cb);
       }
-    },function(err,result){
-      if(err){
+    }, function (err, result) {
+      if (err) {
         res.err(err);
-      }else{
-        res.render('pages/product/product',{listCategory: result.listCategory,listProduct: result.listProduct})
+      } else {
+        res.render('pages/product/product', { listCategory: result.listCategory, listProduct: result.listProduct })
       }
     })
-  }else
+  } else
     res.redirect('/');
-  
+
 }
 
-exports.add =  async function(req,res,next){  
+exports.add = async function (req, res, next) {
   const name = req.body.name;
   const info = req.body.info;
   const category = req.body.category;
   const price = req.body.price;
   const quantity = req.body.quantity;
-
-  const imagePath = path.join(__dirname,'../public/template/images/products/');
-  const fileUpload = new Resize(imagePath);
-  if(!req.file){
-    res.status(401).json({error: 'Please provide an image'});
+  if (!req.file) {
+    res.status(401).json({ error: 'Please provide an image' });
   }
-  const filename = await fileUpload.save(req.file.buffer);
-  const image = "/template/images/products/" + filename;
-  Product.add(name,info,category,price,quantity,image,function(err,result){
-    if(err){
-      res.err(err);
-    }else{
-      res.redirect('/product');
-    }
+  const uniqueFilename = new Date().toISOString();
+  const cloudinary = require('cloudinary').v2;
+  cloudinary.config({
+    cloud_name: 'hcm-universityofsciences',
+    api_key: '573961923829453',
+    api_secret: 'O4itI9lytPLnkderxnT7uG7qHDM'
   })
+  cloudinary.uploader.upload(
+    "data:image/png;base64,"+(req.file.buffer).toString('base64'),
+    { public_id: 'blog/'+uniqueFilename, tags: 'product'}, // directory and tags are optional
+    function (err, image) {
+      if (err) {
+        return res.send(err)
+      }
+      Product.add(name, info, category, price, quantity, image.url, function (err, result) {
+        if (err) {
+          res.err(err);
+        } else {
+          res.redirect('/product');
+        }
+      })
+    }
+  )
+  
 }
 
-exports.edit = async function(req,res,next){
+exports.edit = async function (req, res, next) {
   const id = req.body.id;
   const name = req.body.name;
   const info = req.body.info;
   const category = req.body.category;
   const price = req.body.price;
   const quantity = req.body.quantity;
-  //
-  const imagePath = path.join(__dirname,'../public/template/images/products/');
-  const fileUpload = new Resize(imagePath);
-  if(!req.file){
-    res.status(401).json({error: 'Please provide an image'});
+  if (!req.file) {
+    res.status(401).json({ error: 'Please provide an image' });
   }
-  const filename = await fileUpload.save(req.file.buffer);
-  const image = "/template/images/products/"+filename;
-  Product.edit(id,name,info,category,price,quantity,image,function(err,result){
-    if(err){
-      res.err(err);
-    }else{
-      res.redirect('/product');
+  const cloudinary = require('cloudinary').v2;
+  cloudinary.config({
+    cloud_name: 'hcm-universityofsciences',
+    api_key: '573961923829453',
+    api_secret: 'O4itI9lytPLnkderxnT7uG7qHDM'
+  });
+  const uniqueFilename = new Date().toISOString();
+  cloudinary.uploader.upload(
+    "data:image/png;base64,"+(req.file.buffer).toString('base64'),
+    {public_id: 'blog/'+uniqueFilename, tags: 'product'}, // directory and tags are optional
+    function (err, image) {
+      if (err) {
+        return res.send(err)
+      }
+      Product.edit(id, name, info, category, price, quantity, image.url, function (err, result) {
+        if (err) {
+          res.err(err);
+        } else {
+          res.redirect('/product');
+        }
+      })
     }
-  })
+  )
+  
 }
 
-exports.delete = function(req,res,next){
-  const id= req.params.id;
+exports.delete = function (req, res, next) {
+  const id = req.params.id;
   console.log(id);
-  Product.delete(id,function(err,result){
-    if(err){
+  Product.delete(id, function (err, result) {
+    if (err) {
       res.err(err);
-    }else{
+    } else {
       res.redirect('/product');
       next();
     }
