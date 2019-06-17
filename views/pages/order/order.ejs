@@ -91,7 +91,8 @@ function formatDate(time) {
                                             <td id="order-phone"><%=order.phone%></td>
                                             <td class="center" id="order-address"><%=order.address%></td>
                                             <td class="center" id="order-update"><%=formatDate(order.update)%></td>
-                                            <td id="order-status"><%if(order.status==0) {%> Đặt hàng thành công
+                                            <td id="order-status" data-id="<%=order.status%>"><%if(order.status==0) {%>
+                                                Đặt hàng thành công
                                                 <%} else if(order.status==1) {%> Tiếp nhận đơn hàng
                                                 <%} else if(order.status==2) {%> Đóng gói
                                                 <%} else if(order.status==3) {%> Giao hàng
@@ -260,87 +261,87 @@ function formatDate(time) {
             return day + '/' + month + '/' + year;
         }
 
-        $("select")
-            .change(function () {
+        // $("select")
+        //     .change(function () {
 
-                $("#list-oders").empty();
+        //         $("#list-oders").empty();
 
-                var element = document.getElementById("myFilter");
-                var selectedValue = element.options[element.selectedIndex].value;
-                console.log(selectedValue);
-                var url = "/order/status/" + selectedValue;
-                console.log(url);
-                $.get(url)
-                    .then(data => {
-                        console.log("Data filter", data);
-                        data.forEach(function (e, i) {
-                            var tr = document.createElement("tr")
-                            var td0 = document.createElement("td")
-                            td0.innerHTML = i;
-                            var td1 = document.createElement("td")
-                            td1.innerHTML = e.orderID;
-                            var td2 = document.createElement("td")
-                            td2.innerHTML = e.customerName;
-                            var td3 = document.createElement("td")
-                            td3.innerHTML = e.phone;
-                            var td4 = document.createElement("td")
-                            td4.innerHTML = e.address;
-                            var td5 = document.createElement("td")
-                            td5.innerHTML = formatDate(e.update);
-                            var td6 = document.createElement("td")
-                            var statusNumber = parseInt(e.status, 10);
-                            var str = "Thanh huong"
-                            switch (statusNumber) {
-                                case 0:
-                                    str = "Đặt hàng thành công"
-                                    break;
+        //         var element = document.getElementById("myFilter");
+        //         var selectedValue = element.options[element.selectedIndex].value;
+        //         console.log(selectedValue);
+        //         var url = "/order/status/" + selectedValue;
+        //         console.log(url);
+        //         $.get(url)
+        //             .then(data => {
+        //                 console.log("Data filter", data);
+        //                 data.forEach(function (e, i) {
+        //                     var tr = document.createElement("tr")
+        //                     var td0 = document.createElement("td")
+        //                     td0.innerHTML = i;
+        //                     var td1 = document.createElement("td")
+        //                     td1.innerHTML = e.orderID;
+        //                     var td2 = document.createElement("td")
+        //                     td2.innerHTML = e.customerName;
+        //                     var td3 = document.createElement("td")
+        //                     td3.innerHTML = e.phone;
+        //                     var td4 = document.createElement("td")
+        //                     td4.innerHTML = e.address;
+        //                     var td5 = document.createElement("td")
+        //                     td5.innerHTML = formatDate(e.update);
+        //                     var td6 = document.createElement("td")
+        //                     var statusNumber = parseInt(e.status, 10);
+        //                     var str = "Thanh huong"
+        //                     switch (statusNumber) {
+        //                         case 0:
+        //                             str = "Đặt hàng thành công"
+        //                             break;
 
-                                case 1:
+        //                         case 1:
 
-                                    str = "Tiếp nhận đơn hàng";
-                                    break;
+        //                             str = "Tiếp nhận đơn hàng";
+        //                             break;
 
-                                case 2:
-                                    str = "Đóng gói";
-                                    break;
+        //                         case 2:
+        //                             str = "Đóng gói";
+        //                             break;
 
-                                case 3:
-                                    str = "Giao hàng";
-                                    break;
+        //                         case 3:
+        //                             str = "Giao hàng";
+        //                             break;
 
-                                case 4:
-                                    str = "Giao hàng thành công"
-                                    break;
+        //                         case 4:
+        //                             str = "Giao hàng thành công"
+        //                             break;
 
-                            }
-                            td6.innerHTML = str;
+        //                     }
+        //                     td6.innerHTML = str;
 
-                            var td7 = document.createElement("td")
-                            td7.setAttribute('class', 'center');
-                            var btn = document.createElement("BUTTON");
-                            btn.setAttribute('class','btn')
-                            btn.setAttribute('class','btn-outline-primary')
-                            btn.setAttribute('class','btn-edit-order')
-                            btn.type = "button";
-                            btn.setAttribute("data-toggle", "modal");
-                            $('[data-toggle="modal"]').tooltip()
-                           // btn.onclick = (function(entry) {return function() {chooseUser(entry);}})(entry);
-                            td7.appendChild(btn);
-                           
+        //                     var td7 = document.createElement("td")
+        //                     td7.setAttribute('class', 'center');
+        //                     var btn = document.createElement("BUTTON");
+        //                     btn.setAttribute('class', 'btn')
+        //                     btn.setAttribute('class', 'btn-outline-primary')
+        //                     btn.setAttribute('class', 'btn-edit-order')
+        //                     btn.type = "button";
+        //                     btn.setAttribute("data-toggle", "modal");
+        //                     $('[data-toggle="modal"]').tooltip()
+        //                     // btn.onclick = (function(entry) {return function() {chooseUser(entry);}})(entry);
+        //                     td7.appendChild(btn);
 
-                            tr.append(td0);
-                            tr.append(td1);
-                            tr.append(td2);
-                            tr.append(td3);
-                            tr.append(td4);
-                            tr.append(td5);
-                            tr.append(td6);
-                            tr.append(td7);
-                            $("#list-oders").append(tr);
 
-                        })
-                    })
-            })
+        //                     tr.append(td0);
+        //                     tr.append(td1);
+        //                     tr.append(td2);
+        //                     tr.append(td3);
+        //                     tr.append(td4);
+        //                     tr.append(td5);
+        //                     tr.append(td6);
+        //                     tr.append(td7);
+        //                     $("#list-oders").append(tr);
+
+        //                 })
+        //             })
+        //     })
 
         $(".btn-edit-order").click(function () {
 
@@ -407,6 +408,30 @@ function formatDate(time) {
             console.log(url)
             $("#myForm").attr('action', url);
         })
+        $('#myFilter').change(function () {
+            var val = parseInt($("#myFilter option:selected").val());
+            var i = 0;
+            if(val == -1){
+                $(".gradeX").each(function(){
+                    $(this).find("#order-stt").text(i);
+                    $(this).show();
+                    i++;
+                    
+                })
+            }else{
+                $(".gradeX").each(function(){
+                    var t = parseInt($(this).find("#order-status").data("id"));
+                    if(t != val){
+                        $(this).hide();
+                    }else{
+                        console.log(i);
+                        $(this).find("#order-stt").text(i);
+                        $(this).show();
+                        i++;
+                    }
+                })
+            }
+        });
     </script>
 </body>
 
