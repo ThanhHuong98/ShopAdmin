@@ -91,9 +91,16 @@
           });
         })
     });
+
+    $(document).ready(function () {
+      var date = new Date();
+          date.setHours(0, 0, 0, 0);
+          var update = date.getTime();
+          setUI(update);
+
+    });
   </script>
-
-
+  
   <script type="text/javascript">
     function preventBack() {
       window.history.forward();
