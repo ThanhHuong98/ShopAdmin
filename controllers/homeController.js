@@ -18,11 +18,11 @@ exports.users = function(req, res, next) {
 
 exports.listOrderSuccess = function(req, res, next){
     const passDate = req.params.update;
-    console.log("update  order", passDate);
+    //console.log("update  order", passDate);
 
     Order.getlistOrderSuccessbyUpdate(passDate, function(err, result){
         if(err) {res.err(err);}
-        console.log("LIST ORDER:", result);
+       // console.log("LIST ORDER:", result);
         //res.end("OK")
         res.json(result);
     })
@@ -30,11 +30,11 @@ exports.listOrderSuccess = function(req, res, next){
 exports.listProductSold= function(req, res, next){
 
     const passDate = req.params.update;
-    console.log("passDate", passDate);
+    //console.log("passDate", passDate);
 
      Sold.getListProductSold(passDate, function(err, result){
         if(err) {res.err(err);}
-         console.log("LIST SOLD", result);
+        // console.log("LIST SOLD", result);
          //res.end("OK")
          res.json(result);
      })
@@ -43,7 +43,7 @@ exports.listProductSold= function(req, res, next){
 
 exports.listUserRegister=function(req, res, next){
   const passDate = req.params.update;
-    console.log("passDate", passDate);
+   // console.log("passDate", passDate);
 
      Customer.getListUserRegister(passDate, function(err, result){
         if(err) {res.err(err);}
@@ -57,7 +57,7 @@ exports.getDataSetChart= async function(req,res, next){
 
   await Sold.getDataChart(function(err, result){
     if(err) {res.err(err);}
-    console.log("Data test CHART", result);
+   // console.log("Data test CHART", result);
     res.json(result);
   })
     // var data = [];

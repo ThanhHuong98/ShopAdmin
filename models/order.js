@@ -54,7 +54,7 @@ exports.updateStatus = function(id, status, callBack)
     var date = new Date();
     date.setHours(0,0,0,0);
     var currentDateNumber = date.getTime();
-    console.log("current", currentDateNumber);
+    //console.log("current", currentDateNumber);
     
     //get data from yesterday: only yesterday
     if(passDateNumber == date.setDate(date.getDate() - 1)){
@@ -64,9 +64,9 @@ exports.updateStatus = function(id, status, callBack)
     collection.find({
         update:{
                     $gte:  passDateNumber,
-                    $lt:   currentDateNumber+1
-                },
-        status:"4"
+                    $lt:   currentDateNumber + 1
+                }
+       // status:"4"
     }).toArray(function (err, result){
         cb(err, result)
 

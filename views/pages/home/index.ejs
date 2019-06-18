@@ -97,6 +97,7 @@
           date.setHours(0, 0, 0, 0);
           var update = date.getTime();
           setUI(update);
+         console.log('load data toay');
 
     });
   </script>
@@ -214,18 +215,6 @@
   <!-- CORE JQUERY  -->
   <script src="javascripts/jquery-1.10.2.js"></script>
   <script>
-      // A $( document ).ready() block.
-
-
-    // var url = "/order/" + "0I7KM0N";
-    // jQuery.get(url)
-    //             .then(data => {
-    //                 console.log('DTATATATA:::', data);
-    //               })
-
-
-  </script>
-  <script>
     (function (global) {
       if (typeof (global) === "undefined") {
         throw new Error("window is undefined");
@@ -283,6 +272,7 @@
           var date = new Date();
           date.setHours(0, 0, 0, 0);
           var update = date.getTime();
+          console.log("today", update)
           setUI(update)
           break;
         case 1:
@@ -369,9 +359,15 @@
         .then(data => {
           var totalPrice = 0;
           data.forEach(function (e) {
-            totalPrice = totalPrice + e.products.totalPrice;
+            var status = parseInt(e.status,10);
+            if(status == 4){
+              totalPrice = totalPrice + e.products.totalPrice;
+            }
+            console.log(status);
+            //if(pareInt(e.status,10)==4)
           })
           var countOrders = data.length;
+          console.log('CountOrder: ', countOrders);
           totalPrice = totalPrice.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
           $('#info-count-order').text(countOrders);
           $('#info-totalprice-order').text(totalPrice)

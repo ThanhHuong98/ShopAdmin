@@ -31,7 +31,6 @@ exports.getListProductSold = function(passDate, cb){
     })
 }
 
-
 exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
     qty,price, update,cb){
     var collection = db.get().collection('Sold');
@@ -52,6 +51,7 @@ exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
                 });
         }//insert
         else{
+            console.log("Vo nsert sold")
             collection.insert({
                 idProduct: _id,
                 name,
@@ -64,6 +64,7 @@ exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
                 update
             },function(err,result){
                 cb(err,result)
+                console.log('Bahg sold', result)
             })
         }
     });
