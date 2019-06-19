@@ -34,6 +34,8 @@ exports.getListProductSold = function(passDate, cb){
 exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
     qty,price, update,cb){
     var collection = db.get().collection('Sold');
+
+    var collectionProduct = db.get().collection('Product');
     
     collection.findOne({idProduct:_id, update:update},function (err, result) {
         cb(err, result)
@@ -51,7 +53,7 @@ exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
                 });
         }//insert
         else{
-            console.log("Vo nsert sold")
+            //console.log("Vo nsert sold")
             collection.insert({
                 idProduct: _id,
                 name,
@@ -64,11 +66,36 @@ exports.saveDataSold = function(numberSold,priceSold,_id, name,category, image,
                 update
             },function(err,result){
                 cb(err,result)
-                console.log('Bahg sold', result)
+                //console.log('Bahg sold', result)
+
+                // collection.find({}).toArray(function(err, listSold){
+                //     console.log("SOLD")
+                //     console.log(listSold)
+       
+                //     listSold.forEach(function(e){
+       
+                //         var _id = e.idProduct;
+                //         console.log(_id);
+       
+                //         collectionProduct.findOne({_id: ObjectId(_id)}, function (err, result) {
+                //            cb(err, result)
+                //            console.log("================");
+                //            console.log(result)
+                //            console.log("================");
+                //            })
+                //        })
+
+                // })
+
             })
         }
+        // 
     });
+
+    //
+    
 }
+
 
 
 const countSoldByCategory = async(code, cb)=>{

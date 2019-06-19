@@ -2,6 +2,8 @@
 var Order = require('../models/order');
 var async = require('async');
 var Sold = require('../models/sold');
+var Product = require('../models/product');
+
 
 exports.order =function(req, res, next) {
     async.parallel({
@@ -71,10 +73,11 @@ exports.updateStatus = function(req, res, callBack)
                                   var item = result.products.items[index];
                                   var qty = result.products.items[index].qty;
                                   var price = result.products.items[index].price;
+                                  
                                   if(item!=null){
                                       Sold.saveDataSold(numberSold,priceSold,item.item._id, item.item.name,item.item.category, item.item.image,
                                         qty,price,update,  function(err, result){
-        
+                                           //if(err) {res.err(err);}
                                       })
                                   }
                                   

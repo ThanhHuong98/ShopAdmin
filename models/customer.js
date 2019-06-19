@@ -37,7 +37,7 @@ exports.editCustomer = function (id, name, address, phone, updatedTime, callBack
             name : name,
             address : address,
             phone : phone,
-            update : updatedTime
+            //update : updatedTime
         }
     }, function(err, result){
         callBack(err, result);

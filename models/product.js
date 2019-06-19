@@ -29,8 +29,8 @@ exports.add = function(name,info,category,price,quantity,image,cb){
         name : name,
         info: info,
         category : category,
-        price : price,
-        quantity :  quantity,
+        price : parseInt(price, 10),
+        quantity :  parseInt(quantity,10),
         image :  image
     },function(err,result){
         cb(err,result)
@@ -46,8 +46,8 @@ exports.edit = function(id,name,info,category,price,quantity,image,cb){
         name : name,
         info: info,
         category : category,
-        price : price,
-        quantity :  quantity,
+        price : parseInt(price, 10),
+        quantity : parseInt(quantity,10),
         image :  image
     },function(err,result){
         cb(err,result)
@@ -63,3 +63,27 @@ exports.delete = function(id,cb){
     })
 }
   
+exports.updateQuantity = function(idProductSold, qty, cb){
+    var collection = db.get().collection('Product');
+
+    collection.findOne({_id : ObjectId(idProductSold)},function (err, result) {
+        if(err) {res.err(err);}
+        else{
+            console.log("=============");
+            console.log(result);
+            // var quantityOld = result.quantity;
+            // quantityOld= parseInt(quantityOld, 10);
+            // var quantityUpdate = quantityOld - qty;
+
+            // collection.updateOne({_id : ObjectId(idProductSold)}, {
+            //     $set: {
+            //         quantity: quantityUpdate,
+            //     }
+            // }, function(err, result){
+            //     cb(err, result);
+            //     console.log("SP SAU KHI UPDATE QUANTITY::", result)
+            // });
+        }
+    })
+   
+}
