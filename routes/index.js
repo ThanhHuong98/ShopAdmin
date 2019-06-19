@@ -35,7 +35,7 @@ router.get('/home/userRegister/:update', home_controller.listUserRegister);
 
 router.get('/user',user_controller.user );
 router.post('/user/edit', user_controller.edit);
-router.post('/user/autho',user_controller.userAutho);
+router.get('/user/autho',user_controller.userAutho);
 
 router.get('/user/delete/:id', user_controller.delete);
 

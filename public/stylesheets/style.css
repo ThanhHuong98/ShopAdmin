@@ -358,3 +358,7 @@ border: 1px solid black;
     color: white;
     font-size: 18px;
 }
+.img-category{
+    height: 100px;
+    width: auto;
+}

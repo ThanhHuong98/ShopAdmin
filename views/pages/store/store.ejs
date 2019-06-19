@@ -89,20 +89,20 @@
                             <div class="form-group row">
                                 <label class="col-lg-2 col-md-2 col-form-label">Tên</label>
                                 <div class="col-lg-10 col-md-10">
-                                    <input class="form-control name" type="text" id="txt-store-name" name='name'>
+                                    <input class="form-control name" type="text" id="txt-store-name" name='name' required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-2 col-md-2 col-form-label">Địa chỉ</label>
                                 <div class="col-lg-10 col-md-10">
                                     <input class="form-control address" type="text" id="txt-store-address"
-                                        name='address'>
+                                        name='address' required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-2 col-md-2 col-form-label">Mô tả</label>
                                 <div class="col-lg-10 col-md-10">
-                                    <input class="form-control name" type="text" id="txt-store-des" name='describe'>
+                                    <input class="form-control name" type="text" id="txt-store-des" name='describe' required>
                                 </div>
                             </div>
                             <label class="col-form-label">Hình ảnh</label>
@@ -110,7 +110,7 @@
                                 <section class="thumbnail-container">
                                     <div class="thumbnail-container--content image-box" for="image-upload">
                                         <input accept="image/jpeg, image/gif, image/png" id="image-upload" multiple=""
-                                            style="display: none;" type="file" name="image" onchange="loadFile(event)">
+                                            style="display: none;" type="file" name="image" onchange="loadFile(event)" required>
                                         <label class="style-pointer" for="image-upload"
                                             style="max-height: 100%; max-width: 100%">
                                             <img class="img-dialog" src="images/imageHolder.png" id="txt-store-image">

@@ -86,7 +86,9 @@
                                                 <a class="btn btn-outline-primary btn-delete-user" type="button"
                                                    href="/user/delete/<%=customer._id%>">
                                                     <i class="far fa-trash-alt"></i></a>
+                                                <a href="/user/autho?id=<%=customer._id%>" id="btn_authorization_admin" class="btn btn-primary" <%if (customer.role == 1){%> disabled <%}%>>Cấp quyền admin</a>
                                               </td>
+                                              
                                         </tr>
                                     <% }); %>
                                     </tbody>
@@ -140,7 +142,6 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
                         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-                        <button type="" id="btn_authorization_admin" class="btn btn-primary">Cấp quyền admin</button>
                     </div>
                 </div>
             </div>
@@ -174,14 +175,14 @@
             $('#txt-user-id').attr('value', id);
         })
 
-        $("#btn_authorization_admin").click(function(){
-            var id = $(this).data('id');
-            $("#my-form").attr('action', '/user/autho?id=' + id);
-            var name = $(this).parent().parent().find('#name_user').text();
-            var address = $(this).parent().parent().find('#address_user').text();
-            var phone = $(this).parent().parent().find('#phone_user').text();
+        // $("#btn_authorization_admin").click(function(){
+        //     var id = $(this).data('id');
+        //     $("#my-form").attr('action', '/user/autho?id=' + id);
+        //     var name = $(this).parent().parent().find('#name_user').text();
+        //     var address = $(this).parent().parent().find('#address_user').text();
+        //     var phone = $(this).parent().parent().find('#phone_user').text();
 
-        })
+        // })
     </script>
 </body>
 

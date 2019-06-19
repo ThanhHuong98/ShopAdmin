@@ -31,26 +31,35 @@ exports.addStore = async function(req, res, next)
   console.log("describe:", describe);
   console.log("address:", address);
 
-  const imagePath = path.join(__dirname,'../public/template/images/stores/');
-    const fileUpload = new Resize(imagePath);
-    if(!req.file){
-      res.status(401).json({error: 'Please provide an image'});
+  if (!req.file) {
+    res.status(401).json({ error: 'Please provide an image' });
+  }
+  const uniqueFilename = new Date().toISOString();
+  const cloudinary = require('cloudinary').v2;
+  cloudinary.config({
+    cloud_name: 'hcm-universityofsciences',
+    api_key: '573961923829453',
+    api_secret: 'O4itI9lytPLnkderxnT7uG7qHDM'
+  })
+  cloudinary.uploader.upload(
+    "data:image/png;base64,"+(req.file.buffer).toString('base64'),
+    { public_id: 'blog/'+uniqueFilename, tags: 'product'}, // directory and tags are optional
+    function (err, image) {
+      if (err) {
+        return res.send(err)
+      }
+      Store.addStore(name, describe, image.url, address, function(err, result){
+        if(err)
+      {
+        return next(err);
+      }
+      else
+      {
+        res.redirect('/store');
+      }
+    });
     }
-  const filename = await fileUpload.save(req.file.buffer);
-  const image = "/template/images/stores/" + filename;
-
-  console.log("image:", image);
-
-  Store.addStore(name, describe, image, address, function(err, result){
-      if(err)
-    {
-      return next(err);
-    }
-    else
-    {
-      res.redirect('/store');
-    }
-  });
+  )
 }
 
 exports.editStore = async function(req, res, next)

@@ -26,23 +26,32 @@ exports.category = async function (req, res, next){
     console.log("name:", name);
     console.log("code:", code);
 
-    const imagePath = path.join(__dirname,'../public/template/images/categories/');
-    const fileUpload = new Resize(imagePath);
-    if(!req.file){
-      res.status(401).json({error: 'Please provide an image'});
+    if (!req.file) {
+      res.status(401).json({ error: 'Please provide an image' });
     }
-    const filename = await fileUpload.save(req.file.buffer);
-    const image = "/template/images/categories/" + filename;
-
-    console.log("image:", image);
-
-    Category.addCategory(name, code, "", function(err,result){
-      if(err){
-        res.err(err);
-      }else{
-        res.redirect('/category');
+    const uniqueFilename = new Date().toISOString();
+    const cloudinary = require('cloudinary').v2;
+    cloudinary.config({
+      cloud_name: 'hcm-universityofsciences',
+      api_key: '573961923829453',
+      api_secret: 'O4itI9lytPLnkderxnT7uG7qHDM'
+    })
+    cloudinary.uploader.upload(
+      "data:image/png;base64,"+(req.file.buffer).toString('base64'),
+      { public_id: 'blog/'+uniqueFilename, tags: 'category'}, // directory and tags are optional
+      function (err, image) {
+        if (err) {
+          return res.send(err)
+        }
+        Category.addCategory(name, code, image.url, function(err,result){
+          if(err){
+            res.err(err);
+          }else{
+            res.redirect('/category');
+          }
+        });
       }
-    });
+    )
   }
 
   exports.delete = function (req, res, next) {
@@ -70,21 +79,29 @@ exports.category = async function (req, res, next){
     console.log(name);
     console.log(code);
     console.log("id = ", id);
-
-
-
-    const imagePath = path.join(__dirname,'../public/template/images/categories/');
-    const fileUpload = new Resize(imagePath);
-    if(!req.file){
-      res.status(401).json({error: 'Please provide an image'});
+    if (!req.file) {
+      res.status(401).json({ error: 'Please provide an image' });
     }
-    const filename = await fileUpload.save(req.file.buffer);
-    const image = "/template/images/categories/"+filename;
-
-    Category.editCategory(id, name, code, image, function (err, result) {
-      if (err) { return next(err); }
-      else {
-        res.redirect('/category');
+    const uniqueFilename = new Date().toISOString();
+    const cloudinary = require('cloudinary').v2;
+    cloudinary.config({
+      cloud_name: 'hcm-universityofsciences',
+      api_key: '573961923829453',
+      api_secret: 'O4itI9lytPLnkderxnT7uG7qHDM'
+    })
+    cloudinary.uploader.upload(
+      "data:image/png;base64,"+(req.file.buffer).toString('base64'),
+      { public_id: 'blog/'+uniqueFilename, tags: 'category'}, // directory and tags are optional
+      function (err, image) {
+        if (err) {
+          return res.send(err)
+        }
+        Category.editCategory(id, name, code, image.url, function (err, result) {
+          if (err) { return next(err); }
+          else {
+            res.redirect('/category');
+          }
+        });
       }
-    });
+    )
   }

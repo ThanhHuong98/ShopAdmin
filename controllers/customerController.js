@@ -96,8 +96,7 @@ exports.edit = function(req, res, next)
 }
 
 exports.userAutho = function(req, res, next){
-
-    var id = req.body.id;
+    var id = req.query.id;
     var role = 1;
     
     Customer.editRole(id, role,function (err, result) {
